@@ -34,5 +34,4 @@ Lehrpersonen können Lernunterlagen online stellen, um Schüler die Vorbereitung
     - Lernsets lernen
     - Lernmodi erstellen
 - Cao Anton:
-    - Lernsets mit anderen Personen teilen
-    - Lernsets von anderen Personen lernen
+    - Backend
