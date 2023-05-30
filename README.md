@@ -21,9 +21,7 @@ Lehrpersonen können Lernunterlagen online stellen, um Schüler die Vorbereitung
 - Speichern der Sets je User
 - Lernsets anzeigen
 - Lernsets erstellen
-- Lernsets lernen (in verschiedenen Versionen spielerisch lernen)
-- Lernsets mit anderen Personen teilen
-- Lernsets von anderen Personen lernen
+- Lernsets lernen
 
 ## Aufgabenverteilung
 - Fröller Felix:
