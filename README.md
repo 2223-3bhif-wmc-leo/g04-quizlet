@@ -29,9 +29,10 @@ Lehrpersonen können Lernunterlagen online stellen, um Schüler die Vorbereitung
     - Accounts/Users
 - Lehner David:
     - Lernsets anzeigen
-    - Lernsets speichern
+    - Lernsets löschen/weiterleiten
 - Csomany Axel:
+    - Lernsets verarbeiten
     - Lernsets lernen
-    - Lernmodi erstellen
 - Cao Anton:
-    - Backend
+    - Lernsets erstellen/editieren
+    - Vokabeln erstellen
