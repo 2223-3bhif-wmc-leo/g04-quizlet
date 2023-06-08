@@ -4,14 +4,14 @@
 class User {
     - email: String
     - password: String
-    - sets: List<Set>
+    - sets: Set[]
 }
 
 class Set {
     - title: String
     - description: String
     - isPublic: boolean
-    - content: List<SetElement>
+    - content: SetElement[]
 }
 
 class SetElement {
