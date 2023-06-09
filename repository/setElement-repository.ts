@@ -32,11 +32,11 @@ class SetElementRepository {
     }
 
     public async getSetElementById(setElementId: number): Promise<SetElement> {
-
+        return new SetElement(1, "word", "definition");
     }
 
     public async getSetElementsBySetId(setId: number): Promise<SetElement[]> {
-
+        return [new SetElement(1, "word", "definition")];
     }
 }
 

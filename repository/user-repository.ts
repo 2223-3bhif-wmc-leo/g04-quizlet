@@ -32,7 +32,11 @@ class UserRepository {
     }
 
     public async getUserByEmail(email: String): Promise<User> {
+        return new User("email", "password", []);
+    }
 
+    public async getAllUsers(): Promise<User[]> {
+        return [new User("email", "password", [])];
     }
 }
 
