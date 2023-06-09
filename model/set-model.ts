@@ -3,6 +3,7 @@ import {SetElement} from "./setElement-model";
 class Set {
     // Fields
 
+    private _id: number;
     private _title: String;
     private _description: String;
     private _isPublic: boolean;
@@ -10,7 +11,8 @@ class Set {
 
     // Constructor
 
-    constructor(title: String, description: String, isPublic: boolean, content: SetElement[]) {
+    constructor(id:number, title: String, description: String, isPublic: boolean, content: SetElement[]) {
+        this._id = id;
         this._title = title;
         this._description = description;
         this._isPublic = isPublic;
@@ -18,6 +20,10 @@ class Set {
     }
 
     // Getters
+
+    getId(): number {
+        return this._id;
+    }
 
     getTitle(): String {
         return this._title;
