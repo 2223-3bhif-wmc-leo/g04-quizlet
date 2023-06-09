@@ -1,4 +1,6 @@
 import {User} from "../model/user-model";
+import {Unit} from "../unit";
+import {ServiceBase} from "../service/service-base";
 
 class UserRepository {
     // Singleton
@@ -20,7 +22,12 @@ class UserRepository {
     // Methods
 
     public async updateUser(user: User): Promise<void> {
-
+        const unit: Unit = await Unit.create(false);
+        const stmt = await unit.prepare(`UPDATE user SET password = ? WHERE id = ?`,{
+            1: user.getEmail(),
+            2: user.getPassword()
+        });
+        await stmt.run();
     }
 
     public async insertUser(user: User): Promise<void> {
@@ -31,8 +38,12 @@ class UserRepository {
 
     }
 
-    public async getUserByEmail(email: String): Promise<User> {
-        return new User("email", "password", []);
+    public async getUserByEmail(email: string): Promise<User | null> {
+        const unit: Unit = await Unit.create(true);
+        const stmt = await unit.prepare(`SELECT email FROM user WHERE email = ?`,{
+            1: email
+        })
+        return ServiceBase.getInstance().nullUndefined(await stmt.get<User>());
     }
 
     public async getAllUsers(): Promise<User[]> {

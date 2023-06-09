@@ -11,9 +11,9 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static('public'));
 
-app.use("api/setElement", setElementRouter);
-app.use("api/set", setRouter);
-app.use("api/user", userRouter);
+app.use("/api/setElement", setElementRouter);
+app.use("/api/set", setRouter);
+app.use("/api/user", userRouter);
 
 app.listen(3000, async () => {
     const unit = await Unit.create(true);
