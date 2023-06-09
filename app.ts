@@ -1,6 +1,5 @@
 import express from "express";
 import cors from 'cors';
-import {DB} from "./data";
 import {userRouter} from "./router/user-router";
 import {setElementRouter} from "./router/setElement-router";
 import {setRouter} from "./router/set-router";
