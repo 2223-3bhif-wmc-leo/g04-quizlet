@@ -54,7 +54,7 @@ export class Unit {
 
 export async function ensureSampleDataInserted(unit: Unit): Promise<void> {
     async function alreadyPresent(): Promise<boolean> {
-        const checkStmt = await unit.prepare(""); // TODO: Prepare check statement
+        const checkStmt = await unit.prepare(`SELECT COUNT(email) FROM user`);
         const result = await checkStmt.get();
         const count = result['COUNT'];
 

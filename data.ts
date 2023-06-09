@@ -1,7 +1,7 @@
 import {Database as Driver} from "sqlite3";
 import {open, Database} from "sqlite";
 
-const dbFileName: string = 'flights.db';
+const dbFileName: string = 'LibreLearn.db';
 
 export class DB {
 
@@ -30,6 +30,29 @@ export class DB {
     }
 
     private static async ensureTablesCreated(connection: Database): Promise<void> {
-        // TODO: Create tables if not exists
+        await connection.run(`CREATE TABLE IF NOT EXISTS "user" (
+            email   integer NOT NULL,
+            password text    NOT NULL,
+            CONSTRAINT pk_user PRIMARY KEY (email)
+        ) STRICT`);
+
+        await connection.run(`CREATE TABLE IF NOT EXISTS "set" (
+            setid integer NOT NULL,
+            userEmail integer NOT NULL,
+            title text NOT NULL,
+            description text NULL,
+            ispublic integer NOT NULL,
+            CONSTRAINT pk_set PRIMARY KEY (setid),
+            CONSTRAINT fk_set_user FOREIGN KEY (userEmail) REFERENCES "user" (email) ON DELETE CASCADE
+        ) STRICT`);
+
+        await connection.run(`CREATE TABLE IF NOT EXISTS "setelement" (
+            elementid integer NOT NULL,
+            setid     integer NOT NULL,
+            word      text    NOT NULL,
+            definition text    NOT NULL,
+            CONSTRAINT pk_setelement PRIMARY KEY (elementid),
+            CONSTRAINT fk_setelement_set FOREIGN KEY (setid) REFERENCES "set" (setid) ON DELETE CASCADE
+        ) STRICT`);
     }
 }
