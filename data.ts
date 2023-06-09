@@ -31,14 +31,14 @@ export class DB {
 
     private static async ensureTablesCreated(connection: Database): Promise<void> {
         await connection.run(`CREATE TABLE IF NOT EXISTS "user" (
-            email   integer NOT NULL,
+            email   text NOT NULL,
             password text    NOT NULL,
             CONSTRAINT pk_user PRIMARY KEY (email)
         ) STRICT`);
 
         await connection.run(`CREATE TABLE IF NOT EXISTS "set" (
             setid integer NOT NULL,
-            userEmail integer NOT NULL,
+            userEmail text NOT NULL,
             title text NOT NULL,
             description text NULL,
             ispublic integer NOT NULL,
