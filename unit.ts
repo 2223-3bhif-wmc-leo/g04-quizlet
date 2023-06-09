@@ -54,8 +54,7 @@ export class Unit {
 
 export async function ensureSampleDataInserted(unit: Unit): Promise<void> {
     async function alreadyPresent(): Promise<boolean> {
-        const checkStmt = await unit.prepare(`SELECT COUNT(email)
-                                              FROM user`);
+        const checkStmt = await unit.prepare(`SELECT COUNT(email) AS COUNT FROM user`);
         const result = await checkStmt.get();
         const count = result['COUNT'];
 
@@ -78,7 +77,7 @@ export async function ensureSampleDataInserted(unit: Unit): Promise<void> {
         );
 
         // Insert sample data for User table
-        const user = [1, 'userpassword'];
+        const user = ["example@email.org", 'userpassword'];
         await userInsertStmt.bind({
             1: user[0],
             2: user[1]
@@ -87,7 +86,7 @@ export async function ensureSampleDataInserted(unit: Unit): Promise<void> {
         await userInsertStmt.reset();
 
         // Insert sample data for Set table
-        const set = [1, 1, 'Sample Set', 'This is a sample set.', 1];
+        const set = [1, "example@email.org", 'Sample Set', 'This is a sample set.', 1];
         await setInsertStmt.bind({
             1: set[0],
             2: set[1],
