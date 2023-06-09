@@ -31,23 +31,23 @@ class SetRepository {
     }
 
     public async getSetById(setId: number): Promise<Set> {
-
+        return new Set("title", "description", true, []);
     }
 
     public async getSetsByUserId(userId: number): Promise<Set[]> {
-
+        return [new Set("title", "description", true, [])];
     }
 
     public async getSetsByTitle(title: string): Promise<Set[]> {
-
+        return [new Set("title", "description", true, [])];
     }
 
     public async getAllSets(): Promise<Set[]> {
-
+        return [new Set("title", "description", true, [])];
     }
 
     public async getPublicSets(): Promise<Set[]> {
-
+        return [new Set("title", "description", true, [])];
     }
 }
 
