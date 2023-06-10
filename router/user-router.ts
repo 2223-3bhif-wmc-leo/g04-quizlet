@@ -66,12 +66,14 @@ userRouter.delete(`/user/:email`, async (req, res) => {
         const userRepository = new UserRepository(unit);
         const getUser = await userRepository.getUserByEmail(req.params.email);
         if (getUser === null) {
-            res.status(StatusCodes.NOT_FOUND).send();
+            res.status(StatusCodes.BAD_REQUEST).send();
         } else {
             const result: boolean = await userRepository.deleteUser(getUser);
             if (result) {
+                await unit.complete(true);
                 res.status(StatusCodes.OK).send();
             } else {
+                await unit.complete(false);
                 res.status(StatusCodes.NOT_FOUND).send();
             }
         }
@@ -79,6 +81,6 @@ userRouter.delete(`/user/:email`, async (req, res) => {
         console.log(e);
         res.status(StatusCodes.INTERNAL_SERVER_ERROR).send();
     } finally {
-        await unit.complete();
+        await unit.complete(false);
     }
 });
