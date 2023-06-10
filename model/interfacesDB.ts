@@ -6,6 +6,13 @@ export interface setDb {
     ispublic: boolean
 }
 
+export interface setInsertDb {
+    userEmail: string,
+    title: string,
+    description: string,
+    isPublic: boolean
+}
+
 export interface userDb {
     email: string,
     password: string

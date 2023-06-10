@@ -3,6 +3,7 @@ import {Unit} from "../unit";
 import {StatusCodes} from "http-status-codes";
 import {SetRepository} from "../repository/set-repository";
 import {Set} from "../model/set-model"
+import {setDb, setInsertDb} from "../model/interfacesDB";
 
 export const setRouter = express.Router();
 
@@ -122,19 +123,36 @@ setRouter.delete('/deleteSetById/:id', async (req, res) => {
     }
 });
 
-setRouter.put('/updateSet', async (req, res) => {
+setRouter.put('/updateOrInsertSet', async (req, res) => {
     const unit: Unit = await Unit.create(false);
     try {
         const setRepository = new SetRepository(unit);
-        const setExists: boolean = await setRepository.getSetById(req.body.setId) !== null;
-        const newSet: Set = new Set(req.body.setId, req.body.title, req.body.description, req.body.isPublic, req.body.userId, []);
-        const success: boolean = setExists ? await setRepository.updateSet(newSet) : await setRepository.insertSet(newSet);
-        if (success) {
-            await unit.complete(true);
-            res.status(setExists ? StatusCodes.NO_CONTENT : StatusCodes.CREATED).json(newSet);
+        let success: boolean = false;
+        if (req.body.setId === undefined) {
+            const newSet: setInsertDb = {
+                title: req.body.title,
+                description: req.body.description,
+                isPublic: req.body.isPublic,
+                userEmail: req.body.userEmail
+            };
+            success = await setRepository.insertSet(newSet);
+            if (success) {
+                await unit.complete(true);
+                res.status(StatusCodes.CREATED).json(newSet);
+            } else {
+                await unit.complete(false);
+                res.status(StatusCodes.BAD_REQUEST).send();
+            }
         } else {
-            await unit.complete(false);
-            res.status(StatusCodes.BAD_REQUEST).send();
+            const newSet: Set = new Set(req.body.setId, req.body.userEmail, req.body.title, req.body.description, req.body.isPublic, []);
+            success = await setRepository.updateSet(newSet);
+            if (success) {
+                await unit.complete(true);
+                res.status(StatusCodes.NO_CONTENT).json(newSet);
+            } else {
+                await unit.complete(false);
+                res.status(StatusCodes.BAD_REQUEST).send();
+            }
         }
     } catch (e) {
         console.log(e);

@@ -1,0 +1,36 @@
+### Insert a Set
+PUT http://localhost:3000/api/set/updateOrInsertSet
+Content-Type: application/json
+
+{
+  "title": "this is a test",
+  "description": "testests",
+  "isPublic": true,
+  "userEmail": "example@email.org"
+}
+
+### Update a Set
+
+PUT http://localhost:3000/api/set/updateOrInsertSet
+Content-Type: application/json
+
+{
+  "setId": 1,
+  "userEmail": "example@email.org",
+  "title": "this is a asdfasdfasdfasdf",
+  "description": "srt",
+  "isPublic": false
+}
+
+
+### Get Set by ID
+GET http://localhost:3000/api/set/getSetById/1
+
+### Get public Sets
+GET http://localhost:3000/api/set/getPublicSets
+
+### Get set by Title
+GET http://localhost:3000/api/set/getSetByTitle/this is a test
+
+### Get set by User
+GET http://localhost:3000/api/set/getSetByUser/example@email.org

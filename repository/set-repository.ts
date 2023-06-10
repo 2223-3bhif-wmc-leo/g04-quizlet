@@ -3,7 +3,7 @@ import {RepositoryBase} from "./repository-base";
 import {Unit} from "../unit";
 import {SetElementRepository} from "./setElement-repository";
 import {SetElement} from "../model/setElement-model";
-import {setDb} from "../model/interfacesDB";
+import {setDb, setInsertDb} from "../model/interfacesDB";
 import {Statement} from "sqlite";
 
 class SetRepository extends RepositoryBase {
@@ -19,19 +19,19 @@ class SetRepository extends RepositoryBase {
         await stmt.bind({
             1: set.getTitle(),
             2: set.getDescription(),
-            3: set.getIsPublic(),
+            3: set.getIsPublic() ? 1 : 0,
             4: set.getId()
         });
         return await this.executeStmt(stmt);
     }
 
-    public async insertSet(set: Set): Promise<boolean> {
+    public async insertSet(set: setInsertDb): Promise<boolean> {
         const stmt = await this.unit.prepare('INSERT INTO "Set" (userEmail, title, description, ispublic) VALUES (?1, ?2, ?3, ?4)');
         await stmt.bind({
-            1: set.getUserEmail(),
-            2: set.getTitle(),
-            3: set.getDescription(),
-            4:set.getIsPublic()
+            1: set.userEmail,
+            2: set.title,
+            3: set.description,
+            4: set.isPublic
         });
         return await this.executeStmt(stmt);
     }
@@ -57,7 +57,6 @@ class SetRepository extends RepositoryBase {
             setElements = [];
         }
         const set: Set = new Set(row.setid, row.userEmail, row.title, row.description, row.ispublic, setElements);
-        await this.unit.complete();
         return set;
     }
 
