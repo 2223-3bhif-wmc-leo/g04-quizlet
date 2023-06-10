@@ -1,0 +1,10 @@
+### Delete a SetElement
+DELETE http://localhost:3000/api/setElement/setElement/1
+
+### Insert a Set
+PUT http://localhost:3000/api/setElement/updateOrInsertSetElement
+Content-Type: application/json
+
+{
+
+}
