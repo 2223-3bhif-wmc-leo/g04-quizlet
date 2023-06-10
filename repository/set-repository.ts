@@ -1,20 +1,12 @@
 import {Set} from "../model/set-model";
+import {RepositoryBase} from "./repository-base";
+import {Unit} from "../unit";
 
-class SetRepository {
-    // Singleton
+class SetRepository extends RepositoryBase {
+    // Constructor
 
-    private static instance: SetRepository;
-
-    private constructor() {
-
-    }
-
-    public static getInstance(): SetRepository {
-        if (!SetRepository.instance) {
-            SetRepository.instance = new SetRepository();
-        }
-
-        return SetRepository.instance;
+    public constructor(unit: Unit) {
+        super(unit);
     }
 
     // Methods

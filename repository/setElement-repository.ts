@@ -1,20 +1,12 @@
 import {SetElement} from "../model/setElement-model";
+import {Unit} from "../unit";
+import {RepositoryBase} from "./repository-base";
 
-class SetElementRepository {
-    // Singleton
+class SetElementRepository extends RepositoryBase {
+    // Constructor
 
-    private static instance: SetElementRepository;
-
-    private constructor() {
-
-    }
-
-    public static getInstance(): SetElementRepository {
-        if (!SetElementRepository.instance) {
-            SetElementRepository.instance = new SetElementRepository();
-        }
-
-        return SetElementRepository.instance;
+    public constructor(unit: Unit) {
+        super(unit);
     }
 
     // Methods

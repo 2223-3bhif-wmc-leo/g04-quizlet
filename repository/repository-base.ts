@@ -1,7 +1,7 @@
 import {Unit} from "../unit";
 import {Statement} from "sqlite";
 
-export class ServiceBase {
+export class RepositoryBase {
     protected constructor(protected readonly unit: Unit) {
 
     }
@@ -20,7 +20,7 @@ export class ServiceBase {
     }
 
     protected static unwrapSingle<T>(obj: any | null | undefined, fieldName: string): T | null {
-        obj = ServiceBase.nullIfUndefined(obj);
+        obj = RepositoryBase.nullIfUndefined(obj);
         return obj === null ? null : <T>obj[fieldName];
     }
 
