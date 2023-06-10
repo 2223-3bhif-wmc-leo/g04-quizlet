@@ -17,33 +17,32 @@ class SetElementRepository extends RepositoryBase {
         const stmt = await this.unit.prepare(sql);
         await stmt.bind({
             1: setElement.getWord(),
-            2: setElement.getDefinition()
+            2: setElement.getDefinition(),
+            3: setElement.getId()
         });
 
         return await this.executeStmt(stmt);
     }
 
-    public async insertSetElement(setElement: SetElement): Promise<void> {
-        const sql = "INSERT INTO setelement (elementid, setid, word, definition) VALUES (?1, ?2, ?3, ?4)";
+    public async insertSetElement(setElement: SetElement): Promise<boolean> {
+        const sql = "INSERT INTO setelement (setid, word, definition) VALUES (?2, ?3, ?4)";
         const stmt = await this.unit.prepare(sql);
         await stmt.bind({
-            1: setElement.getId(),
-            2: setElement.getSetId(),
-            3: setElement.getWord(),
-            4: setElement.getDefinition()
+            1: setElement.getSetId(),
+            2: setElement.getWord(),
+            3: setElement.getDefinition()
         });
-
-        await this.executeStmt(stmt);
+        return await this.executeStmt(stmt);
     }
 
-    public async deleteSetElement(setElement: SetElement): Promise<void> {
+    public async deleteSetElement(setElement: SetElement): Promise<boolean> {
         const sql = "DELETE FROM setelement WHERE elementid = ?1";
         const stmt = await this.unit.prepare(sql);
         await stmt.bind({
             1: setElement.getId()
         });
 
-        await this.executeStmt(stmt);
+        return await this.executeStmt(stmt);
     }
 
     public async getSetElementById(setElementId: number): Promise<SetElement | null> {
