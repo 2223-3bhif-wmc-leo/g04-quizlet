@@ -8,18 +8,17 @@ export const userRouter = express.Router();
 userRouter.get(`/:email`, async (req, res) => {
     const unit: Unit = await Unit.create(true);
     try {
-        const userRepository = UserRepository.getInstance();
+        const userRepository = new UserRepository(unit);
         const result: User | null = await userRepository.getUserByEmail(req.params.email);
         if (result === null) {
             res.status(StatusCodes.NOT_FOUND).send();
-        }
-        else{
+        } else {
             res.status(StatusCodes.OK).json(result);
         }
-    }catch (e) {
+    } catch (e) {
         console.log(e);
         res.status(StatusCodes.INTERNAL_SERVER_ERROR).send();
-    }finally {
+    } finally {
         await unit.complete();
     }
 })
