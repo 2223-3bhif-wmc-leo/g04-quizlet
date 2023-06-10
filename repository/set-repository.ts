@@ -42,7 +42,10 @@ class SetRepository extends RepositoryBase {
             return null;
         }
 
-        const setElements: SetElement[] = await setElementRepository.getSetElementsBySetId(setId);
+        let setElements: SetElement[] | null = await setElementRepository.getSetElementsBySetId(setId);
+        if (setElements === null) {
+            setElements = [];
+        }
         const set: Set = new Set(row.setid, row.userEmail, row.title, row.description, row.ispublic, setElements);
         await this.unit.complete();
         return set;
