@@ -24,3 +24,15 @@ export interface setelementDb {
     word: string,
     definition: string
 }
+
+export interface setelementInsertDb {
+    setId: number,
+    word: string,
+    definition: string
+}
+
+export interface setelementUpdateDb {
+    elementId: number,
+    word: string,
+    definition: string
+}

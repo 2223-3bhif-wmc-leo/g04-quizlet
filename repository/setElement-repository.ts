@@ -1,7 +1,7 @@
 import {SetElement} from "../model/setElement-model";
 import {Unit} from "../unit";
 import {RepositoryBase} from "./repository-base";
-import {setelementDb} from "../model/interfacesDB";
+import {setelementDb, setelementInsertDb, setelementUpdateDb} from "../model/interfacesDB";
 
 class SetElementRepository extends RepositoryBase {
     // Constructor
@@ -12,25 +12,25 @@ class SetElementRepository extends RepositoryBase {
 
     // Methods
 
-    public async updateSetElement(setElement: SetElement): Promise<boolean> {
+    public async updateSetElement(setElement: setelementUpdateDb): Promise<boolean> {
         const sql = "UPDATE setelement SET word = ?1, definition = ?2 WHERE elementid = ?3";
         const stmt = await this.unit.prepare(sql);
         await stmt.bind({
-            1: setElement.getWord(),
-            2: setElement.getDefinition(),
-            3: setElement.getId()
+            1: setElement.word,
+            2: setElement.definition,
+            3: setElement.elementId
         });
 
         return await this.executeStmt(stmt);
     }
 
-    public async insertSetElement(setElement: SetElement): Promise<boolean> {
+    public async insertSetElement(setElement: setelementInsertDb): Promise<boolean> {
         const sql = "INSERT INTO setelement (setid, word, definition) VALUES (?2, ?3, ?4)";
         const stmt = await this.unit.prepare(sql);
         await stmt.bind({
-            1: setElement.getSetId(),
-            2: setElement.getWord(),
-            3: setElement.getDefinition()
+            1: setElement.setId,
+            2: setElement.word,
+            3: setElement.definition
         });
         return await this.executeStmt(stmt);
     }
