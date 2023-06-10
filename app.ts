@@ -19,6 +19,5 @@ app.listen(3000, async () => {
     const unit = await Unit.create(true);
     await ensureSampleDataInserted(unit);
     await unit.complete();
-
     console.log("Server listening on port 3000");
 });

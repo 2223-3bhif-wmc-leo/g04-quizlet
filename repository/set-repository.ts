@@ -15,20 +15,30 @@ class SetRepository extends RepositoryBase {
 
     // Methods
     public async updateSet(set: Set): Promise<boolean> {
-        const stmt = await this.unit.prepare('UPDATE "Set" SET title = ?, description = ?, isPublic = ? WHERE setid = ?');
-        await stmt.bind(set.getTitle(), set.getDescription(), set.getIsPublic(), set.getId());
+        const stmt = await this.unit.prepare('UPDATE "Set" SET title = ?1, description = ?2, isPublic = ?3 WHERE setid = ?4');
+        await stmt.bind({
+            1: set.getTitle(),
+            2: set.getDescription(),
+            3: set.getIsPublic(),
+            4: set.getId()
+        });
         return await this.executeStmt(stmt);
     }
 
     public async insertSet(set: Set): Promise<boolean> {
-        const stmt = await this.unit.prepare('INSERT INTO "Set" (userEmail, title, description, ispublic) VALUES (?, ?, ?, ?)');
-        await stmt.bind(set.getUserEmail(), set.getTitle(), set.getDescription(), set.getIsPublic());
+        const stmt = await this.unit.prepare('INSERT INTO "Set" (userEmail, title, description, ispublic) VALUES (?1, ?2, ?3, ?4)');
+        await stmt.bind({
+            1: set.getUserEmail(),
+            2: set.getTitle(),
+            3: set.getDescription(),
+            4:set.getIsPublic()
+        });
         return await this.executeStmt(stmt);
     }
 
-    public async deleteSet(set: Set): Promise<boolean> {
+    public async deleteSet(setId: number): Promise<boolean> {
         const stmt = await this.unit.prepare('DELETE FROM "Set" WHERE setid = ?');
-        await stmt.bind(set.getId());
+        await stmt.bind(setId);
         return await this.executeStmt(stmt);
     }
 
