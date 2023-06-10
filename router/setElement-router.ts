@@ -91,3 +91,27 @@ setElementRouter.put('/updateOrInsertSetElement', async (req, res) => {
         await unit.complete(false);
     }
 });
+setElementRouter.delete('/setElement/:id', async (req, res) => {
+    const unit: Unit = await Unit.create(false);
+    try {
+        const setElementRepository = new SetElementRepository(unit);
+        const setElementExists = await setElementRepository.getSetElementById(Number(req.params.id));
+        if(setElementExists === null) {
+            res.status(StatusCodes.NOT_FOUND).send();
+        } else{
+            const result: boolean = await setElementRepository.deleteSetElement(setElementExists);
+            if (result) {
+                await unit.complete(true);
+                res.status(StatusCodes.NO_CONTENT).send();
+            } else {
+                await unit.complete(false);
+                res.status(StatusCodes.BAD_REQUEST).send();
+            }
+        }
+    } catch (e) {
+        console.log(e);
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).send();
+    } finally {
+        await unit.complete(false);
+    }
+});
