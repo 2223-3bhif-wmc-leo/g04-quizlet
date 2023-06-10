@@ -3,7 +3,7 @@ import {SetElement} from "./setElement-model";
 class Set {
     // Fields
 
-    private _id: number;
+    private readonly _id: number;
     private _title: String;
     private _description: String;
     private _isPublic: boolean;
