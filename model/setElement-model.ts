@@ -1,18 +1,28 @@
 class SetElement {
     // Fields
-    private _id: number;
+    private readonly _id: number;
+    private readonly _setid: number;
     private _word: String;
     private _definition: String;
 
     // Constructor
 
-    constructor(id: number, word: String, definition: String) {
+    constructor(id: number, setId: number, word: String, definition: String) {
         this._id = id;
+        this._setid = setId;
         this._word = word;
         this._definition = definition;
     }
 
     // Getters
+
+    getId(): number {
+        return this._id;
+    }
+
+    getSetId(): number {
+        return this._setid;
+    }
 
     getWord(): String {
         return this._word;

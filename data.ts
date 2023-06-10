@@ -37,21 +37,19 @@ export class DB {
         ) STRICT`);
 
         await connection.run(`CREATE TABLE IF NOT EXISTS "set" (
-            setid integer NOT NULL,
+            setid integer NOT NULL PRIMARY KEY AUTOINCREMENT,
             userEmail text NOT NULL,
             title text NOT NULL,
             description text NULL,
             ispublic integer NOT NULL,
-            CONSTRAINT pk_set PRIMARY KEY (setid),
             CONSTRAINT fk_set_user FOREIGN KEY (userEmail) REFERENCES "user" (email) ON DELETE CASCADE
         ) STRICT`);
 
         await connection.run(`CREATE TABLE IF NOT EXISTS "setelement" (
-            elementid integer NOT NULL,
+            elementid integer NOT NULL PRIMARY KEY AUTOINCREMENT,
             setid     integer NOT NULL,
             word      text    NOT NULL,
             definition text    NOT NULL,
-            CONSTRAINT pk_setelement PRIMARY KEY (elementid),
             CONSTRAINT fk_setelement_set FOREIGN KEY (setid) REFERENCES "set" (setid) ON DELETE CASCADE
         ) STRICT`);
     }

@@ -1,0 +1,29 @@
+### Insert a Set
+PUT http://localhost:3000/api/setElement/updateOrInsertSetElement
+Content-Type: application/json
+
+{
+  "setId": 1,
+  "definition": "testssts",
+  "word": "alsdkfjlöakj"
+}
+
+### Update a Set
+
+PUT http://localhost:3000/api/setElement/updateOrInsertSetElement
+Content-Type: application/json
+
+{
+  "elementId": 1,
+  "definition": "testssts",
+  "word": "alsdkfjlöakj"
+}
+
+### Get setElement by ID
+GET http://localhost:3000/api/setElement/getSetElementsById/1
+
+### Delete a SetElement
+GET http://localhost:3000/api/setElement/getSetElementsBySetId/1
+
+### Delete a SetElement
+DELETE http://localhost:3000/api/setElement/setElement/1
