@@ -25,7 +25,7 @@ class SetElementRepository extends RepositoryBase {
     }
 
     public async insertSetElement(setElement: setelementInsertDb): Promise<boolean> {
-        const sql = "INSERT INTO setelement (setid, word, definition) VALUES (?2, ?3, ?4)";
+        const sql = "INSERT INTO setelement (setid, word, definition) VALUES (?1, ?2, ?3)";
         const stmt = await this.unit.prepare(sql);
         await stmt.bind({
             1: setElement.setId,

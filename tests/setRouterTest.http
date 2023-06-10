@@ -34,3 +34,7 @@ GET http://localhost:3000/api/set/getSetByTitle/this is a test
 
 ### Get set by User
 GET http://localhost:3000/api/set/getSetByUser/example@email.org
+
+### Delte set
+
+DELETE http://localhost:3000/api/set/deleteSetById/2
