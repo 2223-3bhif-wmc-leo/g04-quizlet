@@ -4,6 +4,7 @@ import {Unit} from "../unit";
 import {SetElementRepository} from "./setElement-repository";
 import {SetElement} from "../model/setElement-model";
 import {setDb} from "../model/interfacesDB";
+import {Statement} from "sqlite";
 
 class SetRepository extends RepositoryBase {
     // Constructor
@@ -47,20 +48,75 @@ class SetRepository extends RepositoryBase {
         return set;
     }
 
-    public async getSetsByUserId(userId: number): Promise<Set[] | null> {
-        return null;
+    public async getSetsByUserId(userEmail: string): Promise<Set[] | null> {
+        const stmt = await this.unit.prepare('SELECT setid, userEmail, title, description, ispublic FROM "Set" WHERE userEmail = ?');
+        await stmt.bind(userEmail);
+        const rows: setDb[] | null = RepositoryBase.nullIfUndefined(await stmt.all<setDb[]>());
+
+        if (rows === null || rows.length === 0) {
+            return null;
+        }
+
+        const sets: Set[] = [];
+        for (let i = 0; i < rows.length; i++) {
+            const setElementRepository = new SetElementRepository(this.unit);
+            let setElements: SetElement[] | null = RepositoryBase.nullIfUndefined(await setElementRepository.getSetElementsBySetId(rows[i].setid));
+
+            if (setElements === null) {
+                setElements = [];
+            }
+
+            const set: Set = new Set(rows[i].setid, rows[i].userEmail, rows[i].title, rows[i].description, rows[i].ispublic, setElements);
+            sets.push(set);
+        }
+        return sets;
     }
 
-    public async getSetsByTitle(title: string): Promise<Set[]> {
-        return [new Set(1, "a@b.c","title", "description", true, [])];
+    public async getSetsByTitle(title: string): Promise<Set[] | null> {
+        const stmt = await this.unit.prepare('SELECT setid, userEmail, title, description, ispublic FROM "Set" WHERE title = ?');
+        await stmt.bind(title);
+        const rows: setDb[] | null = RepositoryBase.nullIfUndefined(await stmt.all<setDb[]>());
+
+        if (rows === null || rows.length === 0) {
+            return null;
+        }
+
+        const sets: Set[] = [];
+        for (let i = 0; i < rows.length; i++) {
+            const setElementRepository = new SetElementRepository(this.unit);
+            let setElements: SetElement[] | null = RepositoryBase.nullIfUndefined(await setElementRepository.getSetElementsBySetId(rows[i].setid));
+
+            if (setElements === null) {
+                setElements = [];
+            }
+
+            const set: Set = new Set(rows[i].setid, rows[i].userEmail, rows[i].title, rows[i].description, rows[i].ispublic, setElements);
+            sets.push(set);
+        }
+        return sets;
     }
 
-    public async getAllSets(): Promise<Set[]> {
-        return [new Set(1, "a@b.c","title", "description", true, [])];
-    }
+    public async getPublicSets(): Promise<Set[] | null> {
+        const stmt: Statement = await this.unit.prepare('SELECT setid, userEmail, title, description, ispublic FROM "Set" WHERE ispublic = 1');
+        const rows: setDb[] | null = RepositoryBase.nullIfUndefined(await stmt.all<setDb[]>());
 
-    public async getPublicSets(): Promise<Set[]> {
-        return [new Set(1, "a@b.c","title", "description", true, [])];
+        if (rows === null || rows.length === 0) {
+            return null;
+        }
+
+        const sets: Set[] = [];
+        for (let i = 0; i < rows.length; i++) {
+            const setElementRepository: SetElementRepository = new SetElementRepository(this.unit);
+            let setElements: SetElement[] | null = RepositoryBase.nullIfUndefined(await setElementRepository.getSetElementsBySetId(rows[i].setid));
+
+            if (setElements === null) {
+                setElements = [];
+            }
+
+            const set: Set = new Set(rows[i].setid, rows[i].userEmail, rows[i].title, rows[i].description, rows[i].ispublic, setElements);
+            sets.push(set);
+        }
+        return sets;
     }
 }
 
