@@ -3,7 +3,8 @@ import {SetElement} from "./setElement-model";
 class Set {
     // Fields
 
-    private readonly _id: number;
+    private _id: number;
+    private _userEmail: String;
     private _title: String;
     private _description: String;
     private _isPublic: boolean;
@@ -11,8 +12,9 @@ class Set {
 
     // Constructor
 
-    constructor(id:number, title: String, description: String, isPublic: boolean, content: SetElement[]) {
+    constructor(id:number, userEmail:String, title: String, description: String, isPublic: boolean, content: SetElement[]) {
         this._id = id;
+        this._userEmail = userEmail;
         this._title = title;
         this._description = description;
         this._isPublic = isPublic;
@@ -41,10 +43,18 @@ class Set {
         return this._content;
     }
 
+    getUserEmail(): String {
+        return this._userEmail;
+    }
+
     // Setters
 
     setTitle(title: String) {
         this._title = title;
+    }
+
+    setUserEmail(userEmail: String) {
+        this._userEmail = userEmail;
     }
 
     setDescription(description: String) {
