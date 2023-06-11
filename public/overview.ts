@@ -1,3 +1,4 @@
+
 interface setDb {
     setid: number,
     userEmail: string,
@@ -20,7 +21,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     let inputForm = <HTMLElement>document.getElementById("inputForm");
 
     //loading from sets from database
-    await getMySets();
+
+    fetchRestEndpoint(`http://localhost:3000/api/set/getSetByUser/${email}`, 'GET').then(async (result) => {
+        await getMySets();
+    });
     await getPublicSets();
 
     //Eventlistener for creating new Sets
@@ -63,6 +67,7 @@ async function fetchRestEndpoint(route: string, method: 'GET' | 'POST' | 'PUT' |
 async function getMySets() {
     const result = await fetchRestEndpoint(`http://localhost:3000/api/set/getSetByUser/${email}`, 'GET');
     let setList = <HTMLElement>document.getElementById("mySets");
+    setList.innerHTML = "";
     result.forEach((oneSet: any) => {
         setList.innerHTML += `
             <div class="card">
@@ -78,6 +83,7 @@ async function getMySets() {
 async function getPublicSets() {
     const result = await fetchRestEndpoint(`http://localhost:3000/api/set/getPublicSets`, 'GET');
     let setList = <HTMLElement>document.getElementById("otherSets");
+    setList.innerHTML = "";
     result.forEach((oneSet: any) => {
         setList.innerHTML += `
             <div class="card">

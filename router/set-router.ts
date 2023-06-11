@@ -15,7 +15,7 @@ setRouter.get('/getSetById/:id', async (req, res) => {
         if (Number(idInput)) {
             const set: Set | null = await setRepository.getSetById(idInput);
             if (set !== null) {
-                res.status(StatusCodes.OK).json(set).send();
+                res.status(StatusCodes.OK).json(set);
             }
             res.status(StatusCodes.NOT_FOUND).send();
         } else {
@@ -37,7 +37,7 @@ setRouter.get('/getSetByUser/:email', async (req, res) => {
         if (idInput !== "") {
             const set: Set[] | null = await setRepository.getSetsByUserId(idInput);
             if (set !== null) {
-                res.status(StatusCodes.OK).json(set).send();
+                res.status(StatusCodes.OK).json(set);
             }
             res.status(StatusCodes.NOT_FOUND).send();
         } else {
@@ -59,7 +59,7 @@ setRouter.get('/getSetByTitle/:title', async (req, res) => {
         if (idInput !== "") {
             const set: Set[] | null = await setRepository.getSetsByTitle(idInput);
             if (set !== null) {
-                res.status(StatusCodes.OK).json(set).send();
+                res.status(StatusCodes.OK).json(set);
             }
             res.status(StatusCodes.NOT_FOUND).send();
         } else {
@@ -79,8 +79,10 @@ setRouter.get('/getPublicSets', async (req, res) => {
             const setRepository: SetRepository = new SetRepository(unit);
             const set: Set[] | null = await setRepository.getPublicSets();
             if (set !== null) {
-                res.status(StatusCodes.OK).json(set).send();
+                await unit.complete();
+                res.status(StatusCodes.OK).json(set);
             } else {
+                await unit.complete();
                 res.status(StatusCodes.NOT_FOUND).send();
             }
         } catch
