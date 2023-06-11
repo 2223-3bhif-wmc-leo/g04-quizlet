@@ -1,5 +1,5 @@
 ### Add new user
-PUT http://localhost:3000/api/user/user
+PUT http://localhost:3000/api/user/userCreate
 Content-Type: application/json
 
 {
@@ -8,7 +8,7 @@ Content-Type: application/json
 }
 
 ### Update existing user
-PUT http://localhost:3000/api/user/user
+PUT http://localhost:3000/api/user/userUpdate
 Content-Type: application/json
 
 {
