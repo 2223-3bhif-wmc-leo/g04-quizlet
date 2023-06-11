@@ -36,6 +36,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             isPublic: isPublic.checked
         }
         await fetchRestEndpoint('http://localhost:3000/api/set/updateOrInsertSet', 'PUT', setInsert);
+        location.reload();
     })
 })
 
