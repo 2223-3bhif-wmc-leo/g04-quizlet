@@ -36,10 +36,14 @@ document.addEventListener("DOMContentLoaded", async () => {
             isPublic: isPublic.checked
         }
         await fetchRestEndpoint('http://localhost:3000/api/set/updateOrInsertSet', 'PUT', setInsert);
-        location.reload();
+        await reload();
     })
 })
 
+async function reload(){
+    await getMySets();
+    await getPublicSets();
+}
 async function fetchRestEndpoint(route: string, method: 'GET' | 'POST' | 'PUT' | 'DELETE', data?: object): Promise<any> {
     let options: any = {method};
     if (data) {
