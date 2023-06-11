@@ -1,3 +1,9 @@
+let createBtn = document.getElementById("userNameInput");
+let passwordInput = document.getElementById("passwordInput");
+let userNameInput = document.getElementById("userNameInput");
+
+
+
 async function fetchRestEndpoint(route: string, method: 'GET' |'POST' |'PUT' |'DELETE', data?: object): Promise<any> {
     let options: any = { method };
     if (data) {
