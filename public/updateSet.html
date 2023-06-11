@@ -2,9 +2,23 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Update Set</title>
+    <script type="module" src="updateSet.js"></script>
+    <link rel="stylesheet" href="/stylesheets/overview.css">
 </head>
 <body>
-
+<div class="container">
+    <h2>Set Element</h2>
+    <form id="inputForm">
+        <input id="wordInput" type="text" placeholder="Word" required>
+        <input id="definitionInput" type="text" placeholder="Definition/Translation" required>
+        <p></p>
+        <input id="createSetElement" type="submit" value="Create Element">
+    </form>
+    <div id="sets">
+        <h3>My elements</h3>
+        <ul id="elementList"></ul>
+    </div>
+</div>
 </body>
 </html>

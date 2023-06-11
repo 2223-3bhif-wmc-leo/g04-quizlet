@@ -82,6 +82,16 @@ ul {
     border-radius: 4px;
 }
 
+.btn-secondary{
+    background-color: #458aaf;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 4px;
+}
+
 .btn-danger{
     background-color: red;
     color: white;

@@ -1,3 +1,4 @@
+
 interface setDb {
     setid: number,
     userEmail: string,
@@ -20,7 +21,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     let inputForm = <HTMLElement>document.getElementById("inputForm");
 
     //loading from sets from database
-    await getMySets();
+
+    fetchRestEndpoint(`http://localhost:3000/api/set/getSetByUser/${email}`, 'GET').then(async (result) => {
+        await getMySets();
+    });
     await getPublicSets();
 
     //Eventlistener for creating new Sets
@@ -36,9 +40,14 @@ document.addEventListener("DOMContentLoaded", async () => {
             isPublic: isPublic.checked
         }
         await fetchRestEndpoint('http://localhost:3000/api/set/updateOrInsertSet', 'PUT', setInsert);
+        await reload();
     })
 })
 
+async function reload(){
+    await getMySets();
+    await getPublicSets();
+}
 async function fetchRestEndpoint(route: string, method: 'GET' | 'POST' | 'PUT' | 'DELETE', data?: object): Promise<any> {
     let options: any = {method};
     if (data) {
@@ -58,13 +67,15 @@ async function fetchRestEndpoint(route: string, method: 'GET' | 'POST' | 'PUT' |
 async function getMySets() {
     const result = await fetchRestEndpoint(`http://localhost:3000/api/set/getSetByUser/${email}`, 'GET');
     let setList = <HTMLElement>document.getElementById("mySets");
+    setList.innerHTML = "";
     result.forEach((oneSet: any) => {
         setList.innerHTML += `
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">${oneSet._title}</h5>
                     <p class="card-text">${oneSet._description}</p> 
-                    <a href="http://localhost:3000/updateSet.html?setid=${oneSet._setid}" class="btn btn-primary">Go to Set</a>
+                    <a href="http://localhost:3000/updateSet.html?setid=${oneSet._id}" class="btn btn-primary">Go to Set</a>
+                    <a href="http://localhost:3000/quiz.html?setid=${oneSet._id}" class="btn btn-secondary">Quiz</a>
                 </div>
             </div>`
     })
@@ -73,6 +84,7 @@ async function getMySets() {
 async function getPublicSets() {
     const result = await fetchRestEndpoint(`http://localhost:3000/api/set/getPublicSets`, 'GET');
     let setList = <HTMLElement>document.getElementById("otherSets");
+    setList.innerHTML = "";
     result.forEach((oneSet: any) => {
         setList.innerHTML += `
             <div class="card">
@@ -80,6 +92,7 @@ async function getPublicSets() {
                     <h5 class="card-title">${oneSet._title}</h5>
                     <p class="card-text">${oneSet._description}</p> 
                     <a href="http://localhost:3000/updateSet.html?setid=${oneSet._setid}" class="btn btn-primary">Go to Set</a>
+                    <a href="http://localhost:3000/quiz.html?setid=${oneSet._setid}" class="btn btn-secondary">Quiz</a>
                 </div>
             </div>`
     })
