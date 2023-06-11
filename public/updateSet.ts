@@ -1,3 +1,8 @@
+interface setElementDb {
+    setId: number,
+    word: string,
+    definition: string
+}
 async function fetchRestEndpoint(route: string, method: 'GET' | 'POST' | 'PUT' | 'DELETE', data?: object): Promise<any> {
     let options: any = {method};
     if (data) {
@@ -21,9 +26,21 @@ document.addEventListener("DOMContentLoaded", async () => {
     let inputForm = <HTMLElement>document.getElementById("inputForm");
 
     await getElements();
+
+    inputForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        let word = <HTMLInputElement>document.getElementById("wordInput");
+        let definition = <HTMLInputElement>document.getElementById("definitionInput");
+        const setElementInsert: setElementDb = {
+            setId: getSetId,
+            word: word.value,
+            definition: definition.value
+        }
+        await fetchRestEndpoint('http://localhost:3000/api/setElement/updateOrInsertSetElement', 'PUT', setElementInsert);
+        location.reload();
+    });
 });
 async function getElements() {
-    // TODO: get all elements from set
     const allElements = await fetchRestEndpoint(`http://localhost:3000/api/setElement/getSetElementsBySetId/${getSetId}`, 'GET');
     let elementList = <HTMLElement>document.getElementById("elementList");
     allElements.forEach((element: any) => {
