@@ -13,16 +13,22 @@ interface setInsertDb {
     isPublic: boolean
 }
 
+const queryParams = new URLSearchParams(window.location.search);
+const email = <string>queryParams.get('email');
+
 document.addEventListener("DOMContentLoaded", async () => {
     let inputForm = <HTMLElement>document.getElementById("inputForm");
+
+    //loading from sets from database
+    await getMySets();
+    await getPublicSets();
+
+    //Eventlistener for creating new Sets
     inputForm.addEventListener("submit", async (event) => {
         event.preventDefault();
         let title = <HTMLInputElement>document.getElementById("titleInput");
         let userNameInputReg = <HTMLInputElement>document.getElementById("descriptionInput");
         let isPublic = <HTMLInputElement>document.getElementById("isPublic");
-
-        const queryParams = new URLSearchParams(window.location.search);
-        const email = <string>queryParams.get('email');
         const setInsert: setInsertDb = {
             userEmail: email,
             title: title.value,
@@ -47,4 +53,34 @@ async function fetchRestEndpoint(route: string, method: 'GET' | 'POST' | 'PUT' |
     if (res.status !== 204) {
         return await res.json();
     }
+}
+
+async function getMySets() {
+    const result = await fetchRestEndpoint(`http://localhost:3000/api/set/getSetByUser/${email}`, 'GET');
+    let setList = <HTMLElement>document.getElementById("mySets");
+    result.forEach((oneSet: any) => {
+        setList.innerHTML += `
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">${oneSet._title}</h5>
+                    <p class="card-text">${oneSet._description}</p> 
+                    <a href="http://localhost:3000/updateSet.html?setid=${oneSet._setid}" class="btn btn-primary">Go to Set</a>
+                </div>
+            </div>`
+    })
+}
+
+async function getPublicSets() {
+    const result = await fetchRestEndpoint(`http://localhost:3000/api/set/getPublicSets`, 'GET');
+    let setList = <HTMLElement>document.getElementById("otherSets");
+    result.forEach((oneSet: any) => {
+        setList.innerHTML += `
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">${oneSet._title}</h5>
+                    <p class="card-text">${oneSet._description}</p> 
+                    <a href="http://localhost:3000/updateSet.html?setid=${oneSet._setid}" class="btn btn-primary">Go to Set</a>
+                </div>
+            </div>`
+    })
 }
