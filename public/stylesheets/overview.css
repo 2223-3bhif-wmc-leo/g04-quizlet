@@ -101,3 +101,23 @@ ul {
     display: inline-block;
     border-radius: 4px;
 }
+.btn-edit{
+background-color: green;
+    padding: 10px;
+    border-radius: 4px;
+    width: 25%;
+    position: relative;
+    left: 25%;
+}
+.btn-delete{
+background-color: red;
+    padding: 10px;
+    border-radius: 4px;
+    width: 25%;
+    position: relative;
+    left: 25%;
+}
+.th{
+    position: relative;
+    text-align: left;
+}

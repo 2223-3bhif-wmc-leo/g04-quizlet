@@ -72,8 +72,17 @@ async function getMySets() {
         setList.innerHTML += `
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">${oneSet._title}</h5>
-                    <p class="card-text">${oneSet._description}</p> 
+                    <table>
+                        <tr>
+                            <th class="th">
+                                <h5 class="card-title">${oneSet._title}</h5>
+                                <p class="card-text">${oneSet._description}</p> 
+                            </th>
+                            <th>
+                                <button class="btn-edit" id="editBtn" type="button" value="Edit">Edit</button>
+                                <button class="btn-delete" id="deleteBtn" type="button">Delete</button>  
+                            </th>
+                    </table>
                     <a href="http://localhost:3000/updateSet.html?setid=${oneSet._id}" class="btn btn-primary">Go to Set</a>
                     <a href="http://localhost:3000/quiz.html?setid=${oneSet._id}" class="btn btn-secondary">Quiz</a>
                 </div>
