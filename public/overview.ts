@@ -78,8 +78,8 @@ async function getMySets() {
                                 <p class="card-text">${oneSet._description}</p> 
                             </th>
                             <th>
-                                <button class="btn-edit" id="editButton" type="button" href="http://localhost:3000/updateSet.html?setid=${oneSet._setid}">Edit</button>
-                                <button class="btn-delete" id="deleteButton" type="button" onclick="setDelete(${oneSet._id})">Delete</button>  
+                                <a class="btn-edit" id="editButton" type="button" href="http://localhost:3000/updateSet.html?email=${oneSet._userEmail}&setid=${oneSet._id}&title=${oneSet._title}&description=${oneSet._description}">Edit</a>
+                                <button class="btn-delete" id="deleteButton" type="button" onclick="setDelete(${oneSet._id})">Delete</button>
                             </th>
                     </table>
                     <a href="http://localhost:3000/overviewElements.html?setid=${oneSet._id}" class="btn btn-primary">Go to Set</a>

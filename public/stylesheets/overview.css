@@ -107,7 +107,6 @@ ul {
     padding: 10px;
     color: inherit;
     border-radius: 4px;
-    width: 25%;
     position: relative;
     left: 25%;
     text-decoration: none;
@@ -116,7 +115,6 @@ ul {
     background-color: red;
     padding: 10px;
     border-radius: 4px;
-    width: 25%;
     position: relative;
     left: 25%;
 }
