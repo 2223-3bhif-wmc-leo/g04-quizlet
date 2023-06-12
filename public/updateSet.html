@@ -3,22 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>Update Set</title>
-    <script type="module" src="updateSet.js"></script>
     <link rel="stylesheet" href="/stylesheets/overview.css">
 </head>
 <body>
 <div class="container">
-    <h2>Set Element</h2>
+    <h2>Edit Set</h2>
     <form id="inputForm">
-        <input id="wordInput" type="text" placeholder="Word" required>
-        <input id="definitionInput" type="text" placeholder="Definition/Translation" required>
+        <input id="titleInput" type="text" placeholder="Set Title" required>
+        <input id="descriptionInput" type="text" placeholder="Set description" required>
+        <p>Public:</p>
+        <input id="isPublic" type="checkbox" name="public" value="public">
         <p></p>
-        <input id="createSetElement" type="submit" value="Create Element">
+        <input id="createSetBtn" type="submit" value="Edit set">
     </form>
-    <div id="sets">
-        <h3>My elements</h3>
-        <ul id="elementList"></ul>
-    </div>
+    <button id="deleteSetBtn" onclick="onDeleteBtn()" value="Delete button">Delete </button>
 </div>
+</form>
+    <script src="updateSet.js"></script>
 </body>
 </html>

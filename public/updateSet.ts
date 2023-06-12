@@ -1,8 +1,41 @@
-interface setElementDb {
+interface setDb {
     setId: number,
-    word: string,
-    definition: string
+    userEmail: string,
+    title: string,
+    description: string,
+    isPublic: boolean
 }
+
+const queryParams = new URLSearchParams(window.location.search);
+const email = <string>queryParams.get('email');
+const setId = <string>queryParams.get('setid');
+const title = <string>queryParams.get('title');
+const description = <string>queryParams.get('description');
+
+document.addEventListener("DOMContentLoaded", async () => {
+    let inputForm = <HTMLElement>document.getElementById("inputForm");
+    let titleForm = <HTMLInputElement>document.getElementById("titleInput");
+    let descriptionForm = <HTMLInputElement>document.getElementById("descriptionInput");
+    //titleForm.setAttribute("value", title.replace("%20", " "));
+    //descriptionForm.setAttribute("value", description.replace("%20", " "));
+
+    //Eventlistener for creating new Sets
+    inputForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        titleForm = <HTMLInputElement>document.getElementById("titleInput");
+        descriptionForm = <HTMLInputElement>document.getElementById("descriptionInput");
+        let isPublic = <HTMLInputElement>document.getElementById("isPublic");
+        const setUpdate: setDb = {
+            setId: parseInt(setId),
+            userEmail: email,
+            title: titleForm.value,
+            description: descriptionForm.value,
+            isPublic: isPublic.checked
+        }
+        console.log(setUpdate);
+        await fetchRestEndpoint('http://localhost:3000/api/set/updateOrInsertSet', 'PUT', setUpdate); // problem
+    });
+})
 async function fetchRestEndpoint(route: string, method: 'GET' | 'POST' | 'PUT' | 'DELETE', data?: object): Promise<any> {
     let options: any = {method};
     if (data) {
@@ -19,37 +52,7 @@ async function fetchRestEndpoint(route: string, method: 'GET' | 'POST' | 'PUT' |
     }
 }
 
-const queryParams = new URLSearchParams(window.location.search);
-const getSetId = <number><unknown>queryParams.get('setid');
-
-document.addEventListener("DOMContentLoaded", async () => {
-    let inputForm = <HTMLElement>document.getElementById("inputForm");
-
-    await getElements();
-
-    inputForm.addEventListener("submit", async (event) => {
-        event.preventDefault();
-        let word = <HTMLInputElement>document.getElementById("wordInput");
-        let definition = <HTMLInputElement>document.getElementById("definitionInput");
-        const setElementInsert: setElementDb = {
-            setId: getSetId,
-            word: word.value,
-            definition: definition.value
-        }
-        await fetchRestEndpoint('http://localhost:3000/api/setElement/updateOrInsertSetElement', 'PUT', setElementInsert);
-        location.reload();
-    });
-});
-async function getElements() {
-    const allElements = await fetchRestEndpoint(`http://localhost:3000/api/setElement/getSetElementsBySetId/${getSetId}`, 'GET');
-    let elementList = <HTMLElement>document.getElementById("elementList");
-    allElements.forEach((element: any) => {
-        elementList.innerHTML += `
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">${element._word}</h5>
-                    <p class="card-text">${element._definition}</p> 
-                </div>
-            </div>`
-    });
+async function onDeleteBtn() {
+    console.log(setId);
+    await fetchRestEndpoint(`http://localhost:3000/api/set/deleteSetById/${setId}`, 'DELETE');
 }

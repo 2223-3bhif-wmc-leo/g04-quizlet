@@ -101,3 +101,29 @@ ul {
     display: inline-block;
     border-radius: 4px;
 }
+.btn-edit{
+    background-color: green;
+    font-weight: lighter;
+    padding: 10px;
+    color: inherit;
+    border-radius: 4px;
+    position: relative;
+    left: 25%;
+    text-decoration: none;
+}
+.btn-delete{
+    background-color: red;
+    padding: 10px;
+    border-radius: 4px;
+    position: relative;
+    left: 25%;
+}
+.th{
+    position: relative;
+    text-align: left;
+}
+.set-delete{
+    background-color: red;
+    color: white;
+    cursor: pointer;
+}

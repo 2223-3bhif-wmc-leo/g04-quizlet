@@ -16,17 +16,14 @@ interface setInsertDb {
 
 const queryParams = new URLSearchParams(window.location.search);
 const email = <string>queryParams.get('email');
-
 document.addEventListener("DOMContentLoaded", async () => {
     let inputForm = <HTMLElement>document.getElementById("inputForm");
-
     //loading from sets from database
 
     fetchRestEndpoint(`http://localhost:3000/api/set/getSetByUser/${email}`, 'GET').then(async (result) => {
         await getMySets();
     });
     await getPublicSets();
-
     //Eventlistener for creating new Sets
     inputForm.addEventListener("submit", async (event) => {
         event.preventDefault();
@@ -41,13 +38,14 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
         await fetchRestEndpoint('http://localhost:3000/api/set/updateOrInsertSet', 'PUT', setInsert);
         await reload();
-    })
+    });
 })
 
 async function reload(){
     await getMySets();
     await getPublicSets();
 }
+
 async function fetchRestEndpoint(route: string, method: 'GET' | 'POST' | 'PUT' | 'DELETE', data?: object): Promise<any> {
     let options: any = {method};
     if (data) {
@@ -63,7 +61,6 @@ async function fetchRestEndpoint(route: string, method: 'GET' | 'POST' | 'PUT' |
         return await res.json();
     }
 }
-
 async function getMySets() {
     const result = await fetchRestEndpoint(`http://localhost:3000/api/set/getSetByUser/${email}`, 'GET');
     let setList = <HTMLElement>document.getElementById("mySets");
@@ -72,13 +69,22 @@ async function getMySets() {
         setList.innerHTML += `
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">${oneSet._title}</h5>
-                    <p class="card-text">${oneSet._description}</p> 
-                    <a href="http://localhost:3000/updateSet.html?setid=${oneSet._id}" class="btn btn-primary">Go to Set</a>
+                    <table>
+                        <tr>
+                            <th class="th">
+                                <h5 class="card-title">${oneSet._title}</h5>
+                                <p class="card-text">${oneSet._description}</p> 
+                            </th>
+                            <th>
+                                <a class="btn-edit" id="editButton" type="button" href="http://localhost:3000/updateSet.html?email=${oneSet._userEmail}&setid=${oneSet._id}&title=${oneSet._title}&description=${oneSet._description}">Edit</a>
+                            </th>
+                        </tr>
+                    </table>
+                    <a href="http://localhost:3000/overviewElements.html?setid=${oneSet._id}" class="btn btn-primary">Go to Set</a>
                     <a href="http://localhost:3000/quiz.html?setid=${oneSet._id}" class="btn btn-secondary">Quiz</a>
                 </div>
             </div>`
-    })
+    });
 }
 
 async function getPublicSets() {
@@ -91,7 +97,6 @@ async function getPublicSets() {
                 <div class="card-body">
                     <h5 class="card-title">${oneSet._title}</h5>
                     <p class="card-text">${oneSet._description}</p> 
-                    <a href="http://localhost:3000/updateSet.html?setid=${oneSet._setid}" class="btn btn-primary">Go to Set</a>
                     <a href="http://localhost:3000/quiz.html?setid=${oneSet._setid}" class="btn btn-secondary">Quiz</a>
                 </div>
             </div>`
