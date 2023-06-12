@@ -16,8 +16,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     let inputForm = <HTMLElement>document.getElementById("inputForm");
     let titleForm = <HTMLInputElement>document.getElementById("titleInput");
     let descriptionForm = <HTMLInputElement>document.getElementById("descriptionInput");
-    titleForm.setAttribute("value", title.replace("%20", " "));
-    descriptionForm.setAttribute("value", description.replace("%20", " "));
+    //titleForm.setAttribute("value", title.replace("%20", " "));
+    //descriptionForm.setAttribute("value", description.replace("%20", " "));
 
     //Eventlistener for creating new Sets
     inputForm.addEventListener("submit", async (event) => {
@@ -34,11 +34,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
         console.log(setUpdate);
         await fetchRestEndpoint('http://localhost:3000/api/set/updateOrInsertSet', 'PUT', setUpdate); // problem
-    });
-    inputForm.addEventListener("button", async (event) => {
-        event.preventDefault();
-        console.log(setId);
-        await fetchRestEndpoint(`http://localhost:3000/api/set/deleteSetById/${setId}`, 'DELETE');
     });
 })
 async function fetchRestEndpoint(route: string, method: 'GET' | 'POST' | 'PUT' | 'DELETE', data?: object): Promise<any> {
@@ -58,5 +53,6 @@ async function fetchRestEndpoint(route: string, method: 'GET' | 'POST' | 'PUT' |
 }
 
 async function onDeleteBtn() {
+    console.log(setId);
     await fetchRestEndpoint(`http://localhost:3000/api/set/deleteSetById/${setId}`, 'DELETE');
 }
