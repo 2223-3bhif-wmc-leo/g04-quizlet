@@ -102,15 +102,18 @@ ul {
     border-radius: 4px;
 }
 .btn-edit{
-background-color: green;
+    background-color: green;
+    font-weight: lighter;
     padding: 10px;
+    color: inherit;
     border-radius: 4px;
     width: 25%;
     position: relative;
     left: 25%;
+    text-decoration: none;
 }
 .btn-delete{
-background-color: red;
+    background-color: red;
     padding: 10px;
     border-radius: 4px;
     width: 25%;

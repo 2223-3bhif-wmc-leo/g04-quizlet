@@ -19,7 +19,7 @@ const email = <string>queryParams.get('email');
 
 document.addEventListener("DOMContentLoaded", async () => {
     let inputForm = <HTMLElement>document.getElementById("inputForm");
-
+    let deleteButton = <HTMLElement>document.getElementById("deleteButton");
     //loading from sets from database
 
     fetchRestEndpoint(`http://localhost:3000/api/set/getSetByUser/${email}`, 'GET').then(async (result) => {
@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
         await fetchRestEndpoint('http://localhost:3000/api/set/updateOrInsertSet', 'PUT', setInsert);
         await reload();
-    })
+    });
 })
 
 async function reload(){
@@ -63,7 +63,6 @@ async function fetchRestEndpoint(route: string, method: 'GET' | 'POST' | 'PUT' |
         return await res.json();
     }
 }
-
 async function getMySets() {
     const result = await fetchRestEndpoint(`http://localhost:3000/api/set/getSetByUser/${email}`, 'GET');
     let setList = <HTMLElement>document.getElementById("mySets");
@@ -79,11 +78,11 @@ async function getMySets() {
                                 <p class="card-text">${oneSet._description}</p> 
                             </th>
                             <th>
-                                <button class="btn-edit" id="editBtn" type="button" value="Edit">Edit</button>
-                                <button class="btn-delete" id="deleteBtn" type="button">Delete</button>  
+                                <button class="btn-edit" id="editButton" type="button" href="http://localhost:3000/updateSet.html?setid=${oneSet._setid}">Edit</button>
+                                <button class="btn-delete" id="deleteButton" type="button" onclick="setDelete(${oneSet._id})">Delete</button>  
                             </th>
                     </table>
-                    <a href="http://localhost:3000/updateSet.html?setid=${oneSet._id}" class="btn btn-primary">Go to Set</a>
+                    <a href="http://localhost:3000/overviewElements.html?setid=${oneSet._id}" class="btn btn-primary">Go to Set</a>
                     <a href="http://localhost:3000/quiz.html?setid=${oneSet._id}" class="btn btn-secondary">Quiz</a>
                 </div>
             </div>`
@@ -100,9 +99,20 @@ async function getPublicSets() {
                 <div class="card-body">
                     <h5 class="card-title">${oneSet._title}</h5>
                     <p class="card-text">${oneSet._description}</p> 
-                    <a href="http://localhost:3000/updateSet.html?setid=${oneSet._setid}" class="btn btn-primary">Go to Set</a>
+                    <a href="http://localhost:3000/overviewElements.html?setid=${oneSet._setid}" class="btn btn-primary">Go to Set</a>
                     <a href="http://localhost:3000/quiz.html?setid=${oneSet._setid}" class="btn btn-secondary">Quiz</a>
                 </div>
             </div>`
     })
 }
+/*function setDelete(setid: number){
+    deleteSet(setid).then(() => {
+
+    }).catch(error => {
+        console.log(error);
+    });
+}
+async function deleteSet(setid: number) {
+    await fetchRestEndpoint(`http://localhost:3000/api/set/deleteSetById/${setid}`, 'DELETE');
+    await reload();
+}*/
