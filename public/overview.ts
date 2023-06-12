@@ -16,17 +16,14 @@ interface setInsertDb {
 
 const queryParams = new URLSearchParams(window.location.search);
 const email = <string>queryParams.get('email');
-
 document.addEventListener("DOMContentLoaded", async () => {
     let inputForm = <HTMLElement>document.getElementById("inputForm");
-    let deleteButton = <HTMLElement>document.getElementById("deleteButton");
     //loading from sets from database
 
     fetchRestEndpoint(`http://localhost:3000/api/set/getSetByUser/${email}`, 'GET').then(async (result) => {
         await getMySets();
     });
     await getPublicSets();
-
     //Eventlistener for creating new Sets
     inputForm.addEventListener("submit", async (event) => {
         event.preventDefault();
@@ -48,19 +45,6 @@ async function reload(){
     await getMySets();
     await getPublicSets();
 }
-
-async function deleteSet(setId: string) {
-    await fetchRestEndpoint(`http://localhost:3000/api/set/deleteSetById/${setId}`, 'DELETE');
-    await reload();
-}
-
-// Add event listener to the delete button
-const deleteButton = document.getElementById("deleteButton");
-deleteButton?.addEventListener("click", () => {
-    const setId = '${oneSet._id}';
-    deleteSet(setId);
-});
-
 
 async function fetchRestEndpoint(route: string, method: 'GET' | 'POST' | 'PUT' | 'DELETE', data?: object): Promise<any> {
     let options: any = {method};
@@ -93,7 +77,6 @@ async function getMySets() {
                             </th>
                             <th>
                                 <a class="btn-edit" id="editButton" type="button" href="http://localhost:3000/updateSet.html?email=${oneSet._userEmail}&setid=${oneSet._id}&title=${oneSet._title}&description=${oneSet._description}">Edit</a>
-                                <button class="btn-delete" id="deleteButton" type="button">Delete</button>
                             </th>
                         </tr>
                     </table>
@@ -101,7 +84,7 @@ async function getMySets() {
                     <a href="http://localhost:3000/quiz.html?setid=${oneSet._id}" class="btn btn-secondary">Quiz</a>
                 </div>
             </div>`
-    })
+    });
 }
 
 async function getPublicSets() {
@@ -114,7 +97,6 @@ async function getPublicSets() {
                 <div class="card-body">
                     <h5 class="card-title">${oneSet._title}</h5>
                     <p class="card-text">${oneSet._description}</p> 
-                    <a href="http://localhost:3000/overviewElements.html?setid=${oneSet._setid}" class="btn btn-primary">Go to Set</a>
                     <a href="http://localhost:3000/quiz.html?setid=${oneSet._setid}" class="btn btn-secondary">Quiz</a>
                 </div>
             </div>`

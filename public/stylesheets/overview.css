@@ -122,3 +122,8 @@ ul {
     position: relative;
     text-align: left;
 }
+.set-delete{
+    background-color: red;
+    color: white;
+    cursor: pointer;
+}

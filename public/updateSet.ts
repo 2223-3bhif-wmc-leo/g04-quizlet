@@ -5,6 +5,7 @@ interface setDb {
     description: string,
     isPublic: boolean
 }
+
 const queryParams = new URLSearchParams(window.location.search);
 const email = <string>queryParams.get('email');
 const setId = <string>queryParams.get('setid');
@@ -32,7 +33,12 @@ document.addEventListener("DOMContentLoaded", async () => {
             isPublic: isPublic.checked
         }
         console.log(setUpdate);
-        await fetchRestEndpoint('http://localhost:3000/api/set/updateOrInsertSet', 'PUT', setUpdate);
+        await fetchRestEndpoint('http://localhost:3000/api/set/updateOrInsertSet', 'PUT', setUpdate); // problem
+    });
+    inputForm.addEventListener("button", async (event) => {
+        event.preventDefault();
+        console.log(setId);
+        await fetchRestEndpoint(`http://localhost:3000/api/set/deleteSetById/${setId}`, 'DELETE');
     });
 })
 async function fetchRestEndpoint(route: string, method: 'GET' | 'POST' | 'PUT' | 'DELETE', data?: object): Promise<any> {
@@ -49,4 +55,8 @@ async function fetchRestEndpoint(route: string, method: 'GET' | 'POST' | 'PUT' |
     if (res.status !== 204) {
         return await res.json();
     }
+}
+
+async function onDeleteBtn() {
+    await fetchRestEndpoint(`http://localhost:3000/api/set/deleteSetById/${setId}`, 'DELETE');
 }
