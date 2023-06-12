@@ -48,6 +48,20 @@ async function reload(){
     await getMySets();
     await getPublicSets();
 }
+
+async function deleteSet(setId: string) {
+    await fetchRestEndpoint(`http://localhost:3000/api/set/deleteSetById/${setId}`, 'DELETE');
+    await reload();
+}
+
+// Add event listener to the delete button
+const deleteButton = document.getElementById("deleteButton");
+deleteButton?.addEventListener("click", () => {
+    const setId = '${oneSet._id}';
+    deleteSet(setId);
+});
+
+
 async function fetchRestEndpoint(route: string, method: 'GET' | 'POST' | 'PUT' | 'DELETE', data?: object): Promise<any> {
     let options: any = {method};
     if (data) {
@@ -79,8 +93,9 @@ async function getMySets() {
                             </th>
                             <th>
                                 <a class="btn-edit" id="editButton" type="button" href="http://localhost:3000/updateSet.html?email=${oneSet._userEmail}&setid=${oneSet._id}&title=${oneSet._title}&description=${oneSet._description}">Edit</a>
-                                <button class="btn-delete" id="deleteButton" type="button" onclick="setDelete(${oneSet._id})">Delete</button>
+                                <button class="btn-delete" id="deleteButton" type="button">Delete</button>
                             </th>
+                        </tr>
                     </table>
                     <a href="http://localhost:3000/overviewElements.html?setid=${oneSet._id}" class="btn btn-primary">Go to Set</a>
                     <a href="http://localhost:3000/quiz.html?setid=${oneSet._id}" class="btn btn-secondary">Quiz</a>
@@ -105,14 +120,3 @@ async function getPublicSets() {
             </div>`
     })
 }
-/*function setDelete(setid: number){
-    deleteSet(setid).then(() => {
-
-    }).catch(error => {
-        console.log(error);
-    });
-}
-async function deleteSet(setid: number) {
-    await fetchRestEndpoint(`http://localhost:3000/api/set/deleteSetById/${setid}`, 'DELETE');
-    await reload();
-}*/
