@@ -1,4 +1,3 @@
-
 interface setDb {
     setid: number,
     userEmail: string,
@@ -45,7 +44,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 })
 
-async function reload(){
+async function reload() {
     await getMySets();
     await getPublicSets();
 }
@@ -65,6 +64,7 @@ async function fetchRestEndpoint(route: string, method: 'GET' | 'POST' | 'PUT' |
         return await res.json();
     }
 }
+
 async function getMySets() {
     const result = await fetchRestEndpoint(`http://localhost:3000/api/set/getSetByUser/${email}`, 'GET');
     let setList = <HTMLElement>document.getElementById("mySets");

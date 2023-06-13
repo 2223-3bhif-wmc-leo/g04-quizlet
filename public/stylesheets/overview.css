@@ -178,7 +178,9 @@ ul {
     background-color: #f50057;
 }
 
-.editButton {
+.btn-edit {
+    position: absolute;
+    right: 30vw;
     display: inline-block;
     padding: 12px 24px;
     background-color: #ff4081;
@@ -189,6 +191,39 @@ ul {
     transition: background-color 0.3s ease;
 }
 
-.editButton:hover {
+.btn-edit:hover {
     background-color: #f50057;
+}
+
+.deleteSetBtn{
+    display: inline-block;
+    padding: 10px 20px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #4050ff;
+    color: #fff;
+    font-size: 14px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.deleteSetBtn:hover {
+    background-color: #0021f5;
+}
+
+.logout-btn{
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: #4050ff;
+    color: #fff;
+    font-size: 16px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.create-set-button:hover {
+    background-color: #0021f5;
 }
