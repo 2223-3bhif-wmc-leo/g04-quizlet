@@ -17,6 +17,7 @@ interface setInsertDb {
 const queryParams = new URLSearchParams(window.location.search);
 const email = <string>queryParams.get('email');
 document.addEventListener("DOMContentLoaded", async () => {
+    const createSetButton = <HTMLElement>document.getElementById("createSetButton");
     let inputForm = <HTMLElement>document.getElementById("inputForm");
     //loading from sets from database
 
@@ -25,7 +26,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
     await getPublicSets();
     //Eventlistener for creating new Sets
-    inputForm.addEventListener("submit", async (event) => {
+    /*inputForm.addEventListener("submit", async (event) => {
         event.preventDefault();
         let title = <HTMLInputElement>document.getElementById("titleInput");
         let userNameInputReg = <HTMLInputElement>document.getElementById("descriptionInput");
@@ -38,6 +39,9 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
         await fetchRestEndpoint('http://localhost:3000/api/set/updateOrInsertSet', 'PUT', setInsert);
         await reload();
+    });*/
+    createSetButton.addEventListener("click", async () => {
+        window.location.href = `http://localhost:3000/createSet.html?email=${email}`;
     });
 })
 
