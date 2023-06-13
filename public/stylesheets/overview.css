@@ -107,8 +107,8 @@ ul {
     padding: 10px;
     color: inherit;
     border-radius: 4px;
-    position: relative;
-    left: 25%;
+    position: absolute;
+    right: 15%;
     text-decoration: none;
 }
 .btn-delete{
