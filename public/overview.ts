@@ -101,7 +101,7 @@ async function getPublicSets() {
                 <div class="card-body">
                     <h5 class="card-title">${oneSet._title}</h5>
                     <p class="card-text">${oneSet._description}</p> 
-                    <a href="http://localhost:3000/quiz.html?setid=${oneSet._setid}" class="btn btn-secondary">Quiz</a>
+                    <a href="http://localhost:3000/quiz.html?setid=${oneSet._id}" class="btn btn-secondary">Quiz</a>
                 </div>
             </div>`
     })
