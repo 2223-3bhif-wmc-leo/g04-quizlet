@@ -1,48 +1,112 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f2f2f2;
+    background-color: #000;
+    background-image: linear-gradient(
+            to right top,
+            #23074d,
+            #3b085d,
+            #520a6e,
+            #690c7f,
+            #7f0f91,
+            #950ba3,
+            #ab09b6,
+            #c30bc9,
+            #d923dd,
+            #e743f2,
+            #ec63f7,
+            #f385f7
+    );
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    font-family: "Arial", sans-serif;
+    height: 100vh;
     margin: 0;
-    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .container {
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #fff;
+    max-width: 900px; /* Adjust the width as needed */
+    width: 90%; /* Use a percentage width for responsiveness */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    background-color: rgba(255, 255, 255, 0.1);
+    margin: 0 auto; /* Center the container horizontally */
+    box-sizing: border-box; /* Include padding and border in the width */
 }
 
 h2 {
-    color: #333;
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 30px;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 form {
-    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
 }
 
 input[type="text"],
-input[type="submit"],
 input[type="checkbox"] {
-    margin-bottom: 10px;
-    padding: 10px;
     width: 100%;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    font-size: 16px;
+    outline: none; /* Remove the default focus outline */
+}
+
+input[type="text"]::placeholder {
+    color: #ccc;
+}
+
+input[type="text"]:focus {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: center;
+}
+
+label {
+    margin-left: 10px;
+    color: #fff;
 }
 
 input[type="submit"] {
-    background-color: #4CAF50;
-    color: white;
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    background-color: #ff4081;
+    color: #fff;
+    font-size: 16px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    background-color: #f50057;
 }
 
 #sets {
-    margin-top: 20px;
+    margin-top: 30px;
 }
 
 h3 {
-    color: #333;
-    margin-top: 20px;
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 ul {
@@ -51,10 +115,10 @@ ul {
 }
 
 .card {
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    padding: 10px;
-    margin-bottom: 10px;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 15px;
 }
 
 .card-body {
@@ -64,66 +128,51 @@ ul {
 
 .card-title {
     font-size: 18px;
-    color: #333;
     margin-bottom: 5px;
+    color: #fff;
 }
 
 .card-text {
-    color: #777;
+    color: #fff;
 }
 
-.btn-primary{
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px;
-    text-align: center;
-    text-decoration: none;
+.btn {
     display: inline-block;
-    border-radius: 4px;
-}
-
-.btn-secondary{
-    background-color: #458aaf;
-    color: white;
-    padding: 10px;
-    text-align: center;
+    padding: 10px 20px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #ff4081;
+    color: #fff;
+    font-size: 14px;
     text-decoration: none;
-    display: inline-block;
-    border-radius: 4px;
-}
-
-.btn-danger{
-    background-color: red;
-    color: white;
-    padding: 10px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    border-radius: 4px;
-}
-.btn-edit{
-    background-color: green;
-    font-weight: lighter;
-    padding: 10px;
-    color: inherit;
-    border-radius: 4px;
-    position: absolute;
-    right: 15%;
-    text-decoration: none;
-}
-.btn-delete{
-    background-color: red;
-    padding: 10px;
-    border-radius: 4px;
-    position: relative;
-    left: 25%;
-}
-.th{
-    position: relative;
-    text-align: left;
-}
-.set-delete{
-    background-color: red;
-    color: white;
     cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-secondary {
+    background-color: #536dfe;
+}
+
+.btn:hover {
+    background-color: #f50057;
+}
+
+.btn-secondary:hover {
+    background-color: #304ffe;
+}
+
+.create-set-button {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: #ff4081;
+    color: #fff;
+    font-size: 16px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.create-set-button:hover {
+    background-color: #f50057;
 }
