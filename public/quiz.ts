@@ -67,7 +67,7 @@ async function checkAnswers(){
 document.addEventListener("DOMContentLoaded", async () => {
     await getQuestions();
 
-    const button = document.getElementById('finish');
+    const button = <HTMLElement>document.getElementById('finish');
     button.addEventListener('click', async function () {
         await checkAnswers();
     });

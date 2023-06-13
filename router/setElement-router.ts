@@ -37,7 +37,7 @@ setElementRouter.get('/getSetElementsBySetId/:id', async (req, res) => {
         if (Number(idInput)) {
             const setElement: SetElement[] | null = await setElementRepository.getSetElementsBySetId(idInput);
             if (setElement !== null) {
-                res.status(StatusCodes.OK).json(setElement).send();
+                res.status(StatusCodes.OK).json(setElement);
             }
             res.status(StatusCodes.NOT_FOUND).send();
         }
