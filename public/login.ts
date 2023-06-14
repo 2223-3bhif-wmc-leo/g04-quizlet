@@ -18,7 +18,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         let userOut = await fetchRestEndpoint(`http://localhost:3000/api/user/user/${userInp.email}`, 'GET');
         if (userOut._password === userInp.password) {
-            window.location.href = `http://localhost:3000/overviewSets.html?email=${userInp.email}`;
+            sessionStorage.setItem('email', userInp.email);
+            window.location.href = `overviewSets.html`;
         } else {
             console.log("Login unsuccessful");
         }

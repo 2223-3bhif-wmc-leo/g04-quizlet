@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
         console.log(userInp);
         await fetchRestEndpoint('http://localhost:3000/api/user/userCreate', 'PUT', userInp);
-        window.location.href = `http://localhost:3000/index.html`;
+        window.location.href = `index.html`;
     });
 })
 

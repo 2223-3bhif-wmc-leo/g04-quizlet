@@ -7,7 +7,7 @@ interface setDb {
 }
 
 const queryParams = new URLSearchParams(window.location.search);
-const email = <string>queryParams.get('email');
+const email = <string>sessionStorage.getItem('email');
 const setId = <string>queryParams.get('setid');
 const title = <string>queryParams.get('title');
 const description = <string>queryParams.get('description');
@@ -54,6 +54,6 @@ async function fetchRestEndpoint(route: string, method: 'GET' | 'POST' | 'PUT' |
 
 async function onDeleteBtn() {
     console.log(setId);
-    window.location.href = `http://localhost:3000/overviewSets.html?email=${email}`;
+    window.location.href = `overviewSets.html`;
     await fetchRestEndpoint(`http://localhost:3000/api/set/deleteSetById/${setId}`, 'DELETE');
 }
