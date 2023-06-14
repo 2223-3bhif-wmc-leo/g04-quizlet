@@ -1,5 +1,4 @@
-const queryParams = new URLSearchParams(window.location.search);
-const email = <string>queryParams.get('email');
+const email = <string>sessionStorage.getItem('email');
 
 interface setInsertDb {
     userEmail: string,
@@ -26,7 +25,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             isPublic: isPublic.checked
         }
         await fetchRestEndpoint('http://localhost:3000/api/set/updateOrInsertSet', 'PUT', setInsert);
-        window.location.href = `http://localhost:3000/overviewSets.html?email=${email}`;
+        window.location.href = `overviewSets.html`;
     });
 })
 async function fetchRestEndpoint(route: string, method: 'GET' | 'POST' | 'PUT' | 'DELETE', data?: object): Promise<any> {

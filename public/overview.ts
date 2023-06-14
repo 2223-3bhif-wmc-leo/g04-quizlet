@@ -13,34 +13,16 @@ interface setInsertDb {
     isPublic: boolean
 }
 
-const queryParams = new URLSearchParams(window.location.search);
-const email = <string>queryParams.get('email');
+const email = <string> sessionStorage.getItem('email');
 document.addEventListener("DOMContentLoaded", async () => {
     const createSetButton = <HTMLElement>document.getElementById("createSetButton");
-    let inputForm = <HTMLElement>document.getElementById("inputForm");
-    //loading from sets from database
 
     fetchRestEndpoint(`http://localhost:3000/api/set/getSetByUser/${email}`, 'GET').then(async (result) => {
         await getMySets();
     });
     await getPublicSets();
-    //Eventlistener for creating new Sets
-    /*inputForm.addEventListener("submit", async (event) => {
-        event.preventDefault();
-        let title = <HTMLInputElement>document.getElementById("titleInput");
-        let userNameInputReg = <HTMLInputElement>document.getElementById("descriptionInput");
-        let isPublic = <HTMLInputElement>document.getElementById("isPublic");
-        const setInsert: setInsertDb = {
-            userEmail: email,
-            title: title.value,
-            description: userNameInputReg.value,
-            isPublic: isPublic.checked
-        }
-        await fetchRestEndpoint('http://localhost:3000/api/set/updateOrInsertSet', 'PUT', setInsert);
-        await reload();
-    });*/
     createSetButton.addEventListener("click", async () => {
-        window.location.href = `http://localhost:3000/createSet.html?email=${email}`;
+        window.location.href = `createSet.html`;
     });
 })
 
@@ -80,12 +62,12 @@ async function getMySets() {
                                 <p class="card-text">${oneSet._description}</p> 
                             </th>
                             <th>
-                                <a class="btn-edit" id="editButton" type="button" href="http://localhost:3000/updateSet.html?email=${oneSet._userEmail}&setid=${oneSet._id}&title=${oneSet._title}&description=${oneSet._description}">Edit</a>
+                                <a class="btn-edit" id="editButton" type="button" href="updateSet.html?&setid=${oneSet._id}&title=${oneSet._title}&description=${oneSet._description}">Edit</a>
                             </th>
                         </tr>
                     </table>
-                    <a href="http://localhost:3000/overviewElements.html?setid=${oneSet._id}" class="btn btn-primary">Go to Set</a>
-                    <a href="http://localhost:3000/quiz.html?setid=${oneSet._id}" class="btn btn-secondary">Quiz</a>
+                    <a href="overviewElements.html?setid=${oneSet._id}" class="btn btn-primary">Go to Set</a>
+                    <a href="quiz.html?setid=${oneSet._id}" class="btn btn-secondary">Quiz</a>
                 </div>
             </div>`
     });
@@ -101,7 +83,7 @@ async function getPublicSets() {
                 <div class="card-body">
                     <h5 class="card-title">${oneSet._title}</h5>
                     <p class="card-text">${oneSet._description}</p> 
-                    <a href="http://localhost:3000/quiz.html?setid=${oneSet._id}" class="btn btn-secondary">Quiz</a>
+                    <a href="quiz.html?setid=${oneSet._id}" class="btn btn-secondary">Quiz</a>
                 </div>
             </div>`
     })
