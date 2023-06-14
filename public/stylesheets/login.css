@@ -1,6 +1,5 @@
 body {
-    background-color: #000;
-    background-image: linear-gradient(to right top, #23074d, #3b085d, #520a6e, #690c7f, #7f0f91, #950ba3, #ab09b6, #c30bc9, #d923dd, #e743f2, #ec63f7, #f385f7);
+    background-image: url("../images/loginBackground.png");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;

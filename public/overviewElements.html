@@ -7,14 +7,16 @@
     <link rel="stylesheet" href="/stylesheets/overview.css">
 </head>
 <body>
+<h2 class="headline">Words</h2>
 <div class="container">
-    <h2>Set Element</h2>
-    <form id="inputForm">
-        <input id="wordInput" type="text" placeholder="Word" required>
-        <input id="definitionInput" type="text" placeholder="Definition/Translation" required>
-        <p></p>
-        <input id="createSetElement" type="submit" value="Create Element">
-    </form>
+    <div class="editContainer">
+        <form id="inputForm">
+            <input id="wordInput" type="text" placeholder="Word" required>
+            <input id="definitionInput" type="text" placeholder="Definition/Translation" required>
+            <p></p>
+            <input id="createSetElement" type="submit" value="Create Element">
+        </form>
+    </div>
     <div id="sets">
         <h3>My elements</h3>
         <ul id="elementList"></ul>
