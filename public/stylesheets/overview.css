@@ -107,6 +107,13 @@ ul {
     animation-timing-function: ease-in-out;
 }
 
+.cardWithoutAnimation {
+    background-color: rgba(131, 131, 131, 0.88);
+    padding: 20px;
+    border-radius: 20px;
+    margin-bottom: 15px;
+}
+
 .card-body {
     display: flex;
     flex-direction: column;

@@ -21,7 +21,7 @@ async function getQuestions() {
     const allElements = await fetchRestEndpoint(`http://localhost:3000/api/setElement/getSetElementsBySetId/${getSetId}`, 'GET');
     let questionList = <HTMLElement>document.getElementById("questionList");
     const elementLength = allElements.length;
-    questionList.innerHTML += `<h4>${elementLength} Questions</h4>`;
+    questionList.innerHTML += `<h4 class="headlineBetween">${elementLength} Questions</h4>`;
 
     allElements.forEach((element: any) => {
         questionList.innerHTML += `

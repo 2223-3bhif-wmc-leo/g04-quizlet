@@ -28,7 +28,7 @@ async function showCurrentCard(sideIndex: number): Promise<number> {
     let curDef = currentVocabulary._definition;
 
     card.innerHTML =
-        `<div class="card">
+        `<div class="cardWithoutAnimation">
             <div class="card-body">
             <h1>${curCardIndex + 1}</h1>
             <h1>${sideIndex === 0 ? 'Word:' : 'Definition:'}</h1>
