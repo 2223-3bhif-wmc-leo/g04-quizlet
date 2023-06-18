@@ -19,7 +19,7 @@ const getSetId = <number><unknown>queryParams.get('setid');
 let curCardIndex = 0;
 
 
-async function showCurrentCard(): Promise<number> {
+async function showCurrentCard(sideIndex: number): Promise<number> {
     const allElements = await fetchRestEndpoint(`http://localhost:3000/api/setElement/getSetElementsBySetId/${getSetId}`, 'GET');
     let card = <HTMLElement>document.getElementById("vocabCard");
 
@@ -30,7 +30,9 @@ async function showCurrentCard(): Promise<number> {
     card.innerHTML =
         `<div class="card">
             <div class="card-body">
-            <h1>${curWord}</h1>
+            <h1>${curCardIndex + 1}</h1>
+            <h1>${sideIndex === 0 ? 'Word:' : 'Definition:'}</h1>
+            <h2>${sideIndex === 0 ? curWord : curDef}</h2>
             </div>
         </div>`;
 
@@ -38,22 +40,48 @@ async function showCurrentCard(): Promise<number> {
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
-    const setLength = await showCurrentCard();
+    let curSide: number = 0
+    const setLength: number = await showCurrentCard(curSide);
 
     const prevButton = <HTMLElement>document.getElementById('prev');
+    const flipButton = <HTMLElement>document.getElementById('flip');
     const nextButton = <HTMLElement>document.getElementById('next');
+
+    document.addEventListener('keydown', (event) => {
+        switch (event.key) {
+            case 'ArrowLeft':
+                prevButton.click();
+                break;
+            case 'Enter':
+                flipButton.click();
+                break;
+            case 'ArrowRight':
+                nextButton.click();
+                break;
+            default:
+                break;
+        }
+    });
 
     prevButton.addEventListener('click', async function () {
         if(curCardIndex !== 0){
             curCardIndex--;
-            await showCurrentCard()
+            curSide = 0;
+            await showCurrentCard(curSide)
         }
+    });
+
+    flipButton.addEventListener('click', async function () {
+        curSide = (curSide === 0) ? 1 : 0;
+
+        await showCurrentCard(curSide)
     });
 
     nextButton.addEventListener('click', async function () {
         if(curCardIndex !== setLength - 1){
             curCardIndex++;
-            await showCurrentCard()
+            curSide = 0;
+            await showCurrentCard(0)
         }
     });
 });

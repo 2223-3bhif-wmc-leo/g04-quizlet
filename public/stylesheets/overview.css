@@ -227,3 +227,13 @@ ul {
 .create-set-button:hover {
     background-color: #0021f5;
 }
+
+.controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.controls button {
+    margin: 0 5px;
+}
