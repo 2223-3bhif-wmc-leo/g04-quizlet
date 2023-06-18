@@ -4,5 +4,7 @@ const getSetId = <number><unknown>queryParams.get('setid');
 document.addEventListener("DOMContentLoaded", async () => {
     let learnSelection = <HTMLElement>document.getElementById('learnSelection');
 
-    learnSelection.innerHTML += `<a href="quiz.html?setid=${getSetId}" class="btn btn-secondary">Quiz</a>`;
+    learnSelection.innerHTML +=
+        `<a href="cards.html?setid=${getSetId}" class="btn btn-secondary">Cards</a>
+         <a href="quiz.html?setid=${getSetId}" class="btn btn-secondary">Quiz</a>`;
 })
