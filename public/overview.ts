@@ -67,7 +67,7 @@ async function getMySets() {
                         </tr>
                     </table>
                     <a href="overviewElements.html?setid=${oneSet._id}" class="btn btn-primary">Go to Set</a>
-                    <a href="quiz.html?setid=${oneSet._id}" class="btn btn-secondary">Quiz</a>
+                    <a href="learnSite.html?setid=${oneSet._id}" class="btn btn-secondary">Learn</a>
                 </div>
             </div>`
     });
@@ -83,7 +83,7 @@ async function getPublicSets() {
                 <div class="card-body">
                     <h5 class="card-title">${oneSet._title}</h5>
                     <p class="card-text">${oneSet._description}</p> 
-                    <a href="quiz.html?setid=${oneSet._id}" class="btn btn-secondary">Quiz</a>
+                    <a href="learnSite.html?setid=${oneSet._id}" class="btn btn-secondary">Learn</a>
                 </div>
             </div>`
     })
