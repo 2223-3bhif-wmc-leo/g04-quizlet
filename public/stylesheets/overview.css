@@ -1,20 +1,6 @@
 body {
     background-color: #000;
-    background-image: linear-gradient(
-            to right top,
-            #23074d,
-            #3b085d,
-            #520a6e,
-            #690c7f,
-            #7f0f91,
-            #950ba3,
-            #ab09b6,
-            #c30bc9,
-            #d923dd,
-            #e743f2,
-            #ec63f7,
-            #f385f7
-    );
+    background-image: url("../images/overviewBackground.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -22,28 +8,28 @@ body {
     color: #fff;
     font-family: "Arial", sans-serif;
     margin: 0;
-    display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .container {
-    max-width: 900px; /* Adjust the width as needed */
+    max-width: 1200px; /* Adjust the width as needed */
     width: 90%; /* Use a percentage width for responsiveness */
     padding: 30px;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    background-color: rgba(255, 255, 255, 0.1);
     margin: 0 auto; /* Center the container horizontally */
     box-sizing: border-box; /* Include padding and border in the width */
 }
 
-h2 {
+.headline{
     text-align: center;
-    font-size: 30px;
-    margin-bottom: 30px;
+    font-size: 150px;
+    margin-top: 20px;
+    margin-bottom: 0;
     color: #fff;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    animation-name: slideInTop;
+    animation-duration: 1s;
 }
 
 form {
@@ -87,7 +73,7 @@ input[type="submit"] {
     padding: 12px;
     border: none;
     border-radius: 5px;
-    background-color: #ff4081;
+    background-color: #313e34;
     color: #fff;
     font-size: 16px;
     cursor: pointer;
@@ -95,11 +81,7 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-    background-color: #f50057;
-}
-
-#sets {
-    margin-top: 30px;
+    background-color: #425447;
 }
 
 h3 {
@@ -116,10 +98,13 @@ ul {
 }
 
 .card {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(131, 131, 131, 0.88);
     padding: 20px;
-    border-radius: 5px;
+    border-radius: 20px;
     margin-bottom: 15px;
+    animation-name: slideFromBottom;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
 }
 
 .card-body {
@@ -143,7 +128,7 @@ ul {
     margin-top: 10px;
     border: none;
     border-radius: 5px;
-    background-color: #ff4081;
+    background-color: #313e34;
     color: #fff;
     font-size: 14px;
     text-decoration: none;
@@ -152,11 +137,11 @@ ul {
 }
 
 .btn-secondary {
-    background-color: #536dfe;
+    background-color: #091533;
 }
 
 .btn:hover {
-    background-color: #f50057;
+    background-color: #425447;
 }
 
 .btn-secondary:hover {
@@ -166,65 +151,70 @@ ul {
 .create-set-button {
     display: inline-block;
     padding: 12px 24px;
-    background-color: #ff4081;
+    background-color: #313e34;
     color: #fff;
     font-size: 16px;
     text-decoration: none;
     border-radius: 5px;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.3ms ease-in-out;
 }
 
 .create-set-button:hover {
-    background-color: #f50057;
+    transform: translateY(2px);
+    background-color: #425447;
 }
 
 .btn-edit {
     position: absolute;
-    right: 35%;
+    right: 30%;
     display: inline-block;
     padding: 12px 24px;
-    background-color: #ff4081;
+    background-color: #313e34;
     color: #fff;
     font-size: 16px;
     text-decoration: none;
     border-radius: 5px;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 1ms ease;
 }
 
 .btn-edit:hover {
-    background-color: #f50057;
+    background-color: #425447;
+    transform: translateY(2px);
 }
 
-.deleteSetBtn{
+.deleteSetBtn {
     display: inline-block;
     padding: 10px 20px;
     margin-top: 10px;
     border: none;
     border-radius: 5px;
-    background-color: #4050ff;
+    background-color: #091533;
     color: #fff;
     font-size: 14px;
     text-decoration: none;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.3s ease-in-out;
 }
 
 .deleteSetBtn:hover {
+    transform: translateY(2px);
     background-color: #0021f5;
 }
 
-.logout-btn{
+.logout-btn {
     display: inline-block;
     padding: 12px 24px;
-    background-color: #4050ff;
+    background-color: #091533;
     color: #fff;
     font-size: 16px;
     text-decoration: none;
     border-radius: 5px;
-    transition: background-color 0.3s ease;
+
+    transition: background-color 0.3s ease, transform 0.3s ease-in-out;
 }
 
-.create-set-button:hover {
+.logout-btn:hover {
+    transform: translateY(2px);
     background-color: #0021f5;
 }
 
@@ -236,4 +226,35 @@ ul {
 
 .controls button {
     margin: 0 5px;
+}
+
+.headlineBetween{
+    font-size: 60px;
+    animation-name: slideFromBottom;
+    animation-duration: 1s;
+}
+
+@keyframes slideInTop {
+    from{
+        transform: translateY(-300px);
+    }
+
+    to{
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideFromBottom {
+    from{
+        transform: translateY(2000px);
+    }
+    to{
+        transform: translateY(0px);
+    }
+}
+
+.editContainer{
+    border-radius: 20px;
+    padding: 70px;
+    background-color:rgba(131, 131, 131, 0.88);
 }
