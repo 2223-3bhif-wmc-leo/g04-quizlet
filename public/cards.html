@@ -1,29 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Cards</title>
-  <script type="module" src="cards.js"></script>
-  <style>
-    h1 {
-      text-align: center;
-    }
-  </style>
-  <link rel="stylesheet" href="/stylesheets/overview.css">
+    <meta charset="UTF-8">
+    <title>Cards</title>
+    <script type="module" src="cards.js"></script>
+    <link rel="stylesheet" href="/stylesheets/overview.css">
 </head>
 <body>
-<div class="container">
-  <a id="homeBtn" class="home-btn" href="learnSite.html">Go Back</a>
-  <a id="logoutBtn" class="logout-btn" href="index.html">Logout</a>
-  <h2 class="headline">Cards</h2>
-  <div id="vocabCards">
-    <ul id="vocabCard"></ul>
-    <div class="controls">
-      <button class="btn btn-primary" id="prev">< Prev</button>
-      <button class="btn btn-primary" id="flip">Flip</button>
-      <button class="btn btn-primary" id="next">Next ></button>
+<nav>
+    <div class="navbar-container">
+        <h1 class="navbar-logo">LibreLearn</h1>
+        <a id="homeBtn" class="home-btn" href="learnSite.html">Go Back</a>
+        <a id="logoutBtn" class="logout-btn" href="index.html">Logout</a>
     </div>
-  </div>
+</nav>
+<div class="container">
+    <h2 class="headline">Cards</h2>
+    <div id="vocabCards">
+        <ul id="vocabCard"></ul>
+        <div class="controls">
+            <button class="btn btn-primary" id="prev">< Prev</button>
+            <button class="btn btn-primary" id="flip">Flip</button>
+            <button class="btn btn-primary" id="next">Next ></button>
+        </div>
+    </div>
 
 </div>
 </body>

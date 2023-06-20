@@ -85,6 +85,10 @@ input[type="submit"]:hover {
     background-color: #425447;
 }
 
+.card-body h1, h2 {
+    text-align: center;
+}
+
 h3 {
     font-size: 20px;
     margin-bottom: 10px;
@@ -232,6 +236,7 @@ ul {
     right: 5%;
     transition: background-color 0.3s ease, transform 0.3s ease-in-out;
 }
+
 .home-btn {
     display: inline-block;
     padding: 12px 24px;
@@ -245,6 +250,7 @@ ul {
     left: 5%;
     transition: background-color 0.3s ease, transform 0.3s ease-in-out;
 }
+
 .logout-btn:hover {
     transform: translateY(2px);
     background-color: #0021f5;
