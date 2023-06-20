@@ -34,6 +34,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
         console.log(setUpdate);
         await fetchRestEndpoint('http://localhost:3000/api/set/updateOrInsertSet', 'PUT', setUpdate); // problem
+        window.location.href = `overviewSets.html`;
     });
 })
 async function fetchRestEndpoint(route: string, method: 'GET' | 'POST' | 'PUT' | 'DELETE', data?: object): Promise<any> {
