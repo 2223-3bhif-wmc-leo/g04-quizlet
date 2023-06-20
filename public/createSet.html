@@ -7,28 +7,34 @@
     <link rel="stylesheet" href="/stylesheets/overview.css">
 </head>
 <body>
+<nav>
+    <div class="navbar-container">
+        <h1 class="navbar-logo">LibreLearn</h1>
+        <a id="homeBtn" class="home-btn" href="overviewSets.html">Go Back</a>
+        <a id="logoutBtn" class="logout-btn" href="index.html">Logout</a>
+    </div>
+</nav>
 <div class="container">
-    <a id="homeBtn" class="home-btn" href="overviewSets.html">Go Back</a>
-    <a id="logoutBtn" class="logout-btn" href="index.html">Logout</a>
-
     <h2>Create Your Set</h2>
-    <form id="inputForm">
-        <div class="form-row">
-            <div class="form-group">
-                <label for="titleInput">Set Title</label>
-                <input id="titleInput" type="text" placeholder="Set Title" required>
+    <div class="editContainer">
+        <form id="inputForm">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="titleInput">Set Title</label>
+                    <input id="titleInput" type="text" placeholder="Set Title" required>
+                </div>
+                <div class="form-group">
+                    <label for="descriptionInput">Set Description</label>
+                    <input id="descriptionInput" type="text" placeholder="Set Description" required>
+                </div>
             </div>
             <div class="form-group">
-                <label for="descriptionInput">Set Description</label>
-                <input id="descriptionInput" type="text" placeholder="Set Description" required>
+                <label for="isPublic">Public:</label>
+                <input id="isPublic" type="checkbox" name="public" value="public">
             </div>
-        </div>
-        <div class="form-group">
-            <label for="isPublic">Public:</label>
-            <input id="isPublic" type="checkbox" name="public" value="public">
-        </div>
-        <input id="createSetElement" type="submit" value="Create Set">
-    </form>
+            <input id="createSetElement" type="submit" value="Create Set">
+        </form>
+    </div>
 </div>
 </body>
 </html>
