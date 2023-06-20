@@ -292,15 +292,15 @@ ul {
 }
 
 .navbar-container {
-    position: fixed; /* Add this line */
-    top: 0; /* Add this line */
-    left: 0; /* Add this line */
-    width: 100%; /* Add this line */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 15px 30px;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.7); /* Adjust the opacity by changing the last value (0.7) */
 }
 
 .navbar-logo {
@@ -325,4 +325,18 @@ ul {
 
 .navbar-button:hover {
     background-color: #d5004e;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Apply the animation to the navbar container */
+.navbar-container {
+    animation: fadeIn 0.5s ease;
 }
